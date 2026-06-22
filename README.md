@@ -58,7 +58,7 @@ built-in one.
 ## Setting up a second machine (e.g. Mac mini)
 
 ```bash
-git clone <this-repo-url> ~/claude-code-sync
+git clone https://github.com/alexandrum-coder/claude-code-sync.git ~/claude-code-sync
 mkdir -p ~/.claude/skills ~/.claude/plugins
 
 for name in browser-harness caveman design-extract graphify impeccable; do

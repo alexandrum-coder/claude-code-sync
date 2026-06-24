@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "tensorboard",
+  "owner": "zechenzhangagi",
+  "repo": "ai-research-skills",
+  "path": "13-mlops/tensorboard",
+  "branch": "main",
+  "sha": "c4837ab23c4a9dc3b10fb3265cc90e4bfa195380",
+  "source": "manual"
+}

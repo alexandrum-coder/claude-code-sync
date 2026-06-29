@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "projectName": "Despre AFCT V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea Despre AFCT",
+    "version": "2.0.0",
+    "created": "2026-06-27",
+    "updated": "2026-06-27",
+    "totalTasks": 5,
+    "wordpressPageId": 3953,
+    "status": {
+      "pending": 1,
+      "in-progress": 1,
+      "review": 0,
+      "done": 3,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Titlu + Subtitlu + Paragraf introductiv",
+      "description": "Extrage din document titlul paginii, subtitlul si paragraful introductiv al sectiunii Despre AFCT. Corecteaza diacriticele daca lipsesc. Nu modifica textul.",
+      "details": "Structura vizuala tinta (model CEIDA in Lume):\n  - H1 (titlu pagina): 'Despre AFCT' — centrat, bold, albastru-mov (stilizat de tema)\n  - Subtitlu: 'Misiunea educationala AFCT: Puntea de legatura intre Educatie si Mediul de Afaceri' — centrat, bold, negru\n  - Paragraf introductiv: 'Asociatia Firmelor Constantene AFCT a luat nastere din dorinta de a gasi solutii reale...' pana la '...construind parteneriate functionale intre cei patru mari actori ai educatiei: scoli, elevi, parinti si firme.'\n\nPasi de executie:\n1. Deschide documentul de cerinte, sectiunea 'Despre AFCT'.\n2. Copiaza exact titlul, subtitlul si primul paragraf.\n3. Verifica diacriticele conform checklist CLAUDE.md (s/t cu virgula jos, a scurt, a/i circumflex). Corecteaza EXCLUSIV diacriticele lipsa — nu schimba niciun alt cuvant.\n4. Formateaza ca HTML: <h1>Despre AFCT</h1> + <h2 class='subtitle'>[subtitlu]</h2> + <p>[paragraf]</p>.\n5. Salveaza in fisierul despre-afct-v2/bloc-1-titlu-intro.html.",
+      "testStrategy": "Fisierul bloc-1-titlu-intro.html exista. Textul este identic cu documentul (verificat cuvant cu cuvant). Diacriticele sunt corecte (ș ț ă â î). HTML valid cu structura H1 + H2 + P.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Despre AFCT | Misiunea educationala AFCT: Puntea de legatura intre Educatie si Mediul de Afaceri | Asociatia Firmelor Constantene AFCT a luat nastere din dorinta de a gasi solutii reale la una dintre cele mai mari provocari ale mediului de business contemporan: criza fortei de munca specializate. Am inteles rapid ca rezolvarea nu consta in a astepta ca sistemul sa se schimbe singur, ci in implicarea directa a antreprenorilor in formarea viitoarelor generatii. Astfel, AFCT a devenit un catalizator al progresului, construind parteneriate functionale intre cei patru mari actori ai educatiei: scoli, elevi, parinti si firme. Ne-am asumat rolul de integrator, dezvoltand programe de educatie tehnica si non-formala care pregatesc tinerii nu doar pentru a promova examene, ci pentru a reusi pe piata muncii si in viata reala.",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: Experienta AFCT — 5 categorii",
+      "description": "Extrage din document sectiunea 'Experienta AFCT: Cum conectam ecosistemul educational?' cu toate cele 5 categorii (Scoli, Elevi, Parinti, Firme, Comunitati Locale). Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Experienta AFCT: Cum conectam ecosistemul educational?' — titlu sectiune\n  - 5 itemi cu titlu bold + paragraf descriptiv:\n    * Pentru SCOLI (Parteneriat Public-Privat functional)\n    * Pentru ELEVI (Descoperirea vocatiei si practica pe bune)\n    * Pentru PARINTI (Siguranta si un parcurs profesional clar)\n    * Pentru FIRME (Viitoarea forta de munca, formata la sursa)\n    * Pentru COMUNITATILE LOCALE (Dezvoltare economica si retentia tinerilor acasa)\n\nPasi de executie:\n1. Extrage textul complet al fiecarei categorii din document — EXACT asa cum e scris.\n2. Verifica si corecteaza diacriticele. Zero alte modificari.\n3. Formateaza ca HTML: <h2>[titlu sectiune]</h2> + <ul> cu fiecare categorie ca <li><strong>[titlu categorie]</strong><p>[text]</p></li> SAU ca blocuri H3+P separate.\n4. Salveaza in despre-afct-v2/bloc-2-experienta-afct.html.",
+      "testStrategy": "Fisierul bloc-2-experienta-afct.html exista. Toate cele 5 categorii sunt prezente cu textele complete. Textul este identic cu documentul (diacritice corectate). HTML valid.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [1],
+      "sourceRequirement": "Experienta AFCT: Cum conectam ecosistemul educational? | Pentru SCOLI (Parteneriat Public-Privat functional): Aducem realitatea economica in salile de clasa [...] | Pentru ELEVI (Descoperirea vocatiei si practica pe bune): Tinerii au nevoie de directie [...] | Pentru PARINTI (Siguranta si un parcurs profesional clar): Demontam miturile si redefinim prestigiul meseriilor tehnice [...] | Pentru FIRME (Viitoarea forta de munca, formata la sursa): Nu mai cautati candidati pe o piata epuizata, formati-i de la zero! [...] | Pentru COMUNITATILE LOCALE (Dezvoltare economica si retentia tinerilor acasa): O localitate prospera este una care isi pastreaza tinerii si le ofera un viitor [...]",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Extragere si pregatire text: Viziunea noastra + CTA",
+      "description": "Extrage din document sectiunea 'Viziunea noastra' si call-to-action-ul 'Fii parte din schimbare!'. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Viziunea noastra'\n  - Paragraf: 'Credem cu tarie ca inovatia, educatia continua si specializarea fortei de munca sunt cei mai importanti piloni ai dezvoltarii durabile...'\n  - CTA text: 'Fii parte din schimbare!' — element vizual distinct (bold sau buton, de confirmat cu Ioan)\n\nPasi de executie:\n1. Extrage textul sectiunii 'Viziunea noastra' din document EXACT.\n2. Include CTA-ul 'Fii parte din schimbare!' ca element separat.\n3. Verifica si corecteaza diacriticele.\n4. Formateaza ca HTML: <h2>Viziunea noastra</h2> + <p>[text]</p> + <p><strong>Fii parte din schimbare!</strong></p> (sau <a class='btn'> daca exista link — de confirmat cu Ioan).\n5. Salveaza in despre-afct-v2/bloc-3-viziunea.html.\n\nBLOCKER MINOR: CTA 'Fii parte din schimbare!' — este text simplu sau buton cu link? De confirmat cu Ioan.",
+      "testStrategy": "Fisierul bloc-3-viziunea.html exista. Textul 'Viziunea noastra' este identic cu documentul. CTA-ul este prezent (cu placeholder daca link-ul nu e confirmat). Diacritice corecte.",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [2],
+      "sourceRequirement": "Viziunea noastra | Credem cu tarie ca inovatia, educatia continua si specializarea fortei de munca sunt cei mai importanti piloni ai dezvoltarii durabile. AFCT elimina barierele dintre scoala si companii, asigurandu-se ca fiecare experienta educationala este construita pe fundamentele excelentei in afaceri. | Fii parte din schimbare!",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Introducere continut in pagina draft ID 3953 via Fusion Builder UI",
+      "description": "Introduce in pagina draft 'Despre AFCT V2' (ID 3953) toate cele 3 blocuri de continut pregatite la task-urile 1-3, folosind EXCLUSIV Fusion Builder UI. Ioan executa in builder, eu ghidez pas cu pas.",
+      "details": "METODA: Fusion Builder UI — Ioan executa, eu ghidez. EU NU SALVEZ NICIODATA.\n\nPRE-CONDITIE: Tasks 1, 2, 3 au status done. Fisierele bloc-1-titlu-intro.html, bloc-2-experienta-afct.html, bloc-3-viziunea.html exista si sunt verificate.\n\nPagina de lucru: https://ceida.ro/wp-admin/post.php?post=3953&action=edit\n\nPasi de executie (ghidez Ioan pas cu pas, un element la rand):\n1. Raportez lui Ioan textul exact de introdus pentru fiecare element Fusion Builder.\n2. Ioan localizeaza elementul corespunzator in Fusion Builder (titlu, subtitlu, paragraf, etc.).\n3. Ioan editeaza textul elementului cu textul din fisierele HTML pregatite.\n4. Dupa fiecare element editat: Ioan verifica in previzualizare.\n5. Dupa verificare OK: Ioan salveaza si ma anunta.\n6. Trec la urmatorul element.\n\nOrdinea editarii:\n  - Bloc 1: H1 Titlu + H2 Subtitlu + paragraf(e) intro (din bloc-1-titlu-intro.html)\n  - Bloc 2: H2 Experienta AFCT + cele 5 categorii (din bloc-2-experienta-afct.html)\n  - Bloc 3: H2 Viziunea noastra + paragraf + CTA (din bloc-3-viziunea.html)\n\nNOTA: Nu se modifica header, hero sau footer. Nu se publica draft-ul fara aprobare scrisa Ioan.",
+      "testStrategy": "Toate elementele de text din pagina draft ID 3953 corespund exact cu fisierele HTML pregatite (bloc 1+2+3). Ioan confirma vizual in previzualizare Fusion Builder ca textul este corect si structura respecta modelul CEIDA in Lume.",
+      "status": "in-progress",
+      "priority": "high",
+      "dependencies": [1, 2, 3],
+      "sourceRequirement": "Toate sectiunile paginii Despre AFCT: titlu + subtitlu + intro + Experienta AFCT (5 categorii) + Viziunea noastra + CTA.",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Verificare finala subproiect despre-afct-v2",
+      "description": "Verificare completa: text identic cu documentul, diacritice corecte, structura vizuala conforma modelului site, pagina draft vizibila si aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea Despre AFCT.\n3. Compara cuvant cu cuvant textul din pagina WordPress draft cu documentul. Nota orice diferenta.\n4. Verifica checklist diacritice pentru toate cele 3 blocuri HTML.\n5. Verifica structura vizuala in wp-admin preview: H1 titlu → subtitlu → intro → sectiune Experienta (5 cat.) → Viziunea + CTA.\n6. Confirma ca textul clientului NU a fost modificat (zero parafrazare, zero humanizer).\n7. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-4 au status done. Textul din WP draft este identic cu documentul (exceptie: diacritice corectate). Structura pagina conforma modelului. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [4],
+      "sourceRequirement": "Sectiunea completa Despre AFCT din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
+      "subtasks": []
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "projectName": "Contact V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea CONTACT",
+    "version": "2.0.0",
+    "created": "2026-06-27",
+    "updated": "2026-06-27",
+    "totalTasks": 4,
+    "wordpressPageId": null,
+    "blockers": [
+      "Date de contact reale (email, telefon, adresa) — de furnizat de Ioan. Documentul contine placeholder-uri.",
+      "Link-urile formularelor (5 formulare) — de furnizat de Ioan. Documentul nu specifica URL-urile.",
+      "CTA 'Construim viitorul impreuna. Scrie-ne!' — buton cu link sau text simplu? De confirmat cu Ioan."
+    ],
+    "status": {
+      "pending": 4,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Hero + Date de contact",
+      "description": "Extrage din document titlul, subtitlul si datele de contact ale paginii Contact. Corecteaza diacriticele. Marcheaza placeholderele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H1: 'Contact' SAU 'Construim viitorul impreuna. Scrie-ne!' — de verificat cu Ioan care e titlul H1.\n  - Subtitlu: 'Fie ca vrei sa te inscrii la cursuri, sa sponsorizezi un atelier, sa devii mentor sau sa implementezi CEIDA in primaria ta pentru atragerea de noi investitii, suntem la un mesaj distanta.'\n  - Sectiunea date de contact:\n    * Email: [BLOCKER — de furnizat de Ioan]\n    * Telefon: [BLOCKER — de furnizat de Ioan]\n    * Adresa: 'Sediul Central / Hubbin' by AFCT: [BLOCKER — de furnizat de Ioan]'\n\nPasi de executie:\n1. Extrage EXACT titlul hero, subtitlul si structura datelor de contact din document.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML:\n   <h1>[titlu hero]</h1>\n   <p class='subtitle'>[subtitlu]</p>\n   <div class='contact-info'>\n     <p>Email: <!-- DE COMPLETAT DE IOAN --></p>\n     <p>Telefon: <!-- DE COMPLETAT DE IOAN --></p>\n     <p>Sediul Central / Hubbin' by AFCT: <!-- DE COMPLETAT DE IOAN --></p>\n   </div>\n4. Salveaza in contact-v2/bloc-1-hero-contact.html.\n\nNOTA: Datele de contact sunt BLOCANTE. Fisierul se salveaza cu comentarii placeholder — se actualizeaza cand Ioan furnizeaza datele reale.",
+      "testStrategy": "Fisierul bloc-1-hero-contact.html exista. Titlul hero si subtitlul sunt identice cu documentul. Diacritice corecte. Placeholderele pentru date de contact sunt marcate clar cu comentarii HTML. Ioan a fost informat despre blockerele de date.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Construim viitorul impreuna. Scrie-ne! Fie ca vrei sa te inscrii la cursuri, sa sponsorizezi un atelier, sa devii mentor sau sa implementezi CEIDA in primaria ta pentru atragerea de noi investitii, suntem la un mesaj distanta. Email: [Adresa de email]. Telefon: [Numar de telefon]. Sediul Central / Hubbin' by AFCT: [Adresa completa].",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: 5 butoane formular + Newsletter",
+      "description": "Extrage din document cele 5 tipuri de formulare si butonul Newsletter. Formateaza ca placeholdere HTML. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - Titlu sectiune (daca exista in document): 'Selecteaza cum te putem ajuta:'\n  - 5 butoane formular (link-urile sunt BLOCANTE — de furnizat de Ioan):\n    1. 'Formular Inscriere Beneficiar (Elev / Parinte)'\n    2. 'Formular Companii (Sponsorizari / Early Insertion)'\n    3. 'Formular Comunitati / Primarii (Deschide un centru)'\n    4. 'Formular Mentori / Voluntari'\n    5. 'Inscriere la Newsletter'\n\nPasi de executie:\n1. Extrage EXACT textele butoanelor din document.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML:\n   <h2>Selecteaza cum te putem ajuta:</h2> (daca exista in document)\n   <div class='contact-buttons'>\n     <a class='btn' href='#inscriere-beneficiar'>Formular Inscriere Beneficiar (Elev / Parinte)</a>\n     <a class='btn' href='#companii'>Formular Companii (Sponsorizari / Early Insertion)</a>\n     <a class='btn' href='#comunitati'>Formular Comunitati / Primarii (Deschide un centru)</a>\n     <a class='btn' href='#mentori'>Formular Mentori / Voluntari</a>\n     <a class='btn btn-newsletter' href='#newsletter'>Inscriere la Newsletter</a>\n   </div>\n   <!-- NOTA: href-urile sunt placeholder — de completat de Ioan cu link-urile reale -->\n4. Salveaza in contact-v2/bloc-2-formulare.html.\n\nBLOCKER: Link-urile formularelor nu sunt specificate in document. Intreaba Ioan:\n  - Exista deja formulare active pe ceida.ro?\n  - Plugin de formulare: Contact Form 7, Gravity Forms, WPForms sau altceva?\n  - Sunt formulare separate per tip sau un singur formular cu campuri diferite?",
+      "testStrategy": "Fisierul bloc-2-formulare.html exista. Toate cele 5 butoane si butonul Newsletter prezente cu textele corecte. Href-urile marcate ca placeholder cu comentarii HTML. Ioan informat despre blockerele de link-uri formulare.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [1],
+      "sourceRequirement": "[BUTON] Formular Inscriere Beneficiar (Elev / Parinte). [BUTON] Formular Companii (Sponsorizari / Early Insertion). [BUTON] Formular Comunitati / Primarii (Deschide un centru). [BUTON] Formular Mentori / Voluntari. [BUTON] Inscriere la Newsletter. Selecteaza cum te putem ajuta: [sectiune selector].",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Confirmare page builder + creare pagina WP draft via REST API",
+      "description": "Confirma cu Ioan tipul de page builder, datele de contact reale si link-urile formularelor, apoi creaza pagina 'Contact V2' ca draft WordPress via REST API.",
+      "details": "PRE-CONDITIE 1: Credentiale REST API disponibile (username + application password de la Ioan).\nPRE-CONDITIE 2: Tipul de page builder al ceida.ro confirmat de Ioan.\nPRE-CONDITIE 3 (BLOCKER): Datele de contact reale furnizate de Ioan (email, telefon, adresa).\nPRE-CONDITIE 4 (BLOCKER): Link-urile formularelor clarificate cu Ioan.\n\nDaca blockerele de la PRE-CONDITIE 3 si 4 nu sunt inca rezolvate:\n  → Se poate crea draft-ul cu placeholderele.\n  → Se va face PATCH la pagina cand Ioan furnizeaza datele.\n\nIn functie de page builder:\n  - Gutenberg: trimitem HTML standard.\n  - Elementor: HTML standard functioneaza daca pagina nu are layout Elementor pre-existent.\n\nPasi de executie:\n1. Actualizeaza bloc-1-hero-contact.html cu datele reale daca sunt disponibile de la Ioan.\n2. Actualizeaza bloc-2-formulare.html cu link-urile reale daca sunt disponibile.\n3. Combina: bloc-1-hero-contact.html → bloc-2-formulare.html.\n4. POST la https://ceida.ro/wp-json/wp/v2/pages:\n   Body: { title: 'Contact V2', slug: 'contact-v2', status: 'draft', content: '[HTML combinat]' }\n   Headers: { Authorization: 'Basic [base64(username:app_password)]', Content-Type: 'application/json' }\n5. Salveaza ID-ul paginii returnate in metadata.wordpressPageId.\n6. Verifica in wp-admin → Pages → Drafts ca pagina exista.\n7. Daca datele sunt incomplete: raporteaza clar ce mai lipseste.\nNOTA: Status ramane 'draft'. Nu se publica fara aprobare Ioan.",
+      "testStrategy": "POST returneaza HTTP 201. Pagina 'Contact V2' cu slug 'contact-v2', status 'draft' vizibila in wp-admin. Structura completa prezenta (chiar daca unele campuri sunt inca placeholder). Ioan confirma.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1, 2],
+      "sourceRequirement": "Sectiunea completa CONTACT: titlu hero, subtitlu, date de contact (email, telefon, adresa), 5 butoane formular, buton Newsletter.",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Verificare finala subproiect contact-v2",
+      "description": "Verificare completa: toate cerintele acoperite, datele reale completate, link-uri formulare confirmate sau documentate, diacritice corecte, aprobat de Ioan.",
+      "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Verifica ca datele de contact reale au fost furnizate de Ioan si inserate in pagina WordPress draft:\n   - Email real prezent (nu placeholder)\n   - Telefon real prezent\n   - Adresa completa prezenta\n3. Verifica ca link-urile formularelor au fost clarificate si inserate SAU documentate ca 'de adaugat ulterior' cu acordul Ioan.\n4. Deschide documentul de cerinte, sectiunea CONTACT.\n5. Compara cuvant cu cuvant textele din WP draft cu documentul.\n6. Bifaza checklist diacritice pentru toate fisierele HTML.\n7. Confirma zero text modificat.\n8. Verifica in wp-admin ca pagina arata corect si complet.\n9. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-3 au status done (sau blocked-urile explicate si asumate de Ioan). Textele identice cu documentul. Date de contact reale prezente sau blocker asumat in scris de Ioan. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [3],
+      "sourceRequirement": "Sectiunea completa CONTACT din documentul de cerinte — toate elementele livrate, date reale completate, formulare clarificate.",
+      "subtasks": []
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "projectName": "Intrebari Frecvente (FAQ) V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea INTREBARI FRECVENTE (FAQ)",
+    "version": "2.0.0",
+    "created": "2026-06-27",
+    "updated": "2026-06-27",
+    "totalTasks": 6,
+    "wordpressPageId": null,
+    "status": {
+      "pending": 6,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: FAQ Autoritati Locale — 5 Q&A",
+      "description": "Extrage din document sectiunea FAQ 'Pentru Autoritati Locale' cu toate perechile intrebare-raspuns. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H1: 'Intrebari Frecvente' — centrat, bold, albastru-mov\n  - Subtitlu (daca exista in document): centrat, bold, negru\n  - H2: 'Pentru Autoritati Locale (Primarii, Consilii Judetene)'\n  - Q&A-urile in format accordion (sau H3 + paragraf daca acordeonul nu e disponibil):\n    * Q1: 'Cum ajuta CEIDA la dezvoltarea economica a localitatii mele?'\n    * Q2: 'De ce resurse avem nevoie din partea Primariei pentru a deschide un centru?'\n    * Q3: 'Cum este finantat proiectul intr-o comunitate noua?'\n    * Q4: 'Care este principalul beneficiu al localitatii?'\n    * Q5: 'Care este beneficiul politic al educatiei CEIDA pentru o administratie locala?'\n\nPasi de executie:\n1. Extrage EXACT toate cele 5 Q&A din sectiunea 'Pentru Autoritati Locale' — intrebari si raspunsuri complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML:\n   <h1>Intrebari Frecvente</h1>\n   [subtitlu daca exista]\n   <h2>Pentru Autoritati Locale (Primarii, Consilii Judetene)</h2>\n   Fiecare Q&A: <details><summary>[Intrebare]</summary><p>[Raspuns complet]</p></details>\n   (SAU <h3>[Intrebare]</h3><p>[Raspuns]</p> daca acordeonul nu e posibil)\n4. Salveaza in faq-v2/bloc-1-faq-autoritati.html.",
+      "testStrategy": "Fisierul bloc-1-faq-autoritati.html exista. Toate cele 5 Q&A pentru Autoritati Locale prezente cu raspunsurile complete. Textul identic cu documentul. Diacritice corecte. HTML valid.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Cum ajuta CEIDA la dezvoltarea economica a localitatii mele? Avem experienta sa formam specialisti tehnici chiar in localitate [...]. De ce resurse avem nevoie din partea Primariei? Modelul este modular. Avem nevoie de un spatiu fizic sigur [...]. Cum este finantat proiectul? Finantarea este hibrida: bugete locale, sponsorizari [...]. Care este principalul beneficiu al localitatii? Principalul beneficiu este dezvoltarea economica accelerata si retentia tinerilor in comunitate [...]. Care este beneficiul politic? Beneficiul politic major este impactul social si economic vizibil si rapid din timpul mandatului dumneavoastra.",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: FAQ Companii si Mediul de Afaceri — 3 Q&A",
+      "description": "Extrage din document sectiunea FAQ 'Pentru Companii si Mediul de Afaceri' cu toate perechile intrebare-raspuns. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Pentru Companii si Mediul de Afaceri'\n  - 3 Q&A in format identic cu bloc 1:\n    * Q1: 'Cum ne ajuta CEIDA sa ne gasim forta de munca pregatita?'\n    * Q2: 'Putem personaliza atelierele in functie de industria noastra?'\n    * Q3: 'Ce facilitati fiscale avem?'\n\nPasi de executie:\n1. Extrage EXACT toate cele 3 Q&A cu raspunsurile complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML identic cu bloc 1: H2 + Q&A in format <details><summary>/<h3>+<p>.\n4. Salveaza in faq-v2/bloc-2-faq-companii.html.",
+      "testStrategy": "Fisierul bloc-2-faq-companii.html exista. Toate cele 3 Q&A pentru Companii prezente cu raspunsurile complete. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1],
+      "sourceRequirement": "Cum ne ajuta CEIDA sa ne gasim forta de munca pregatita? Prin programul Early Insertion. In loc sa cautati candidati pe o piata secatuita, vi-i formati din timp [...]. Putem personaliza atelierele? Absolut. Putem adapta atelierele si materialele educative pentru a livra competentele exacte de care aveti nevoie [...]. Ce facilitati fiscale avem? Puteti deduce sponsorizarea integral din impozitul pe profit/venit, conform legii.",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Extragere si pregatire text: FAQ Parinti — 4 Q&A",
+      "description": "Extrage din document sectiunea FAQ 'Pentru Parinti' cu toate perechile intrebare-raspuns. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Pentru Parinti'\n  - 4 Q&A in format identic cu bloc 1:\n    * Q1: 'Este CEIDA o scoala privata care inlocuieste scoala publica?'\n    * Q2: 'Se dau teste sau se pun note?'\n    * Q3: 'Copilul meu sta prea mult pe telefon si nu stie ce vrea. Il ajuta CEIDA?'\n    * Q4: 'Cine plateste participarea la cercurile educationale CEIDA?'\n\nPasi de executie:\n1. Extrage EXACT toate cele 4 Q&A cu raspunsurile complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML identic cu bloc 1.\n4. Salveaza in faq-v2/bloc-3-faq-parinti.html.",
+      "testStrategy": "Fisierul bloc-3-faq-parinti.html exista. Toate cele 4 Q&A pentru Parinti prezente cu raspunsurile complete. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [2],
+      "sourceRequirement": "Este CEIDA o scoala privata care inlocuieste scoala publica? Nu. Suntem un ecosistem de educatie non-formala complementara [...]. Se dau teste sau se pun note? Nu. Am eliminat stresul notelor [...]. Copilul meu sta prea mult pe telefon? Cu siguranta CEIDA ajuta [...]. Cine plateste participarea? Nu dorim sa cerem bani de la parinti! Echipa CEIDA cauta activ banii si restul resurselor necesare in comunitate.",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Extragere si pregatire text: FAQ Beneficiari (Adolescenti si Tineri) — 3 Q&A",
+      "description": "Extrage din document sectiunea FAQ 'Pentru Beneficiari (Adolescenti si Tineri)' cu toate perechile intrebare-raspuns. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Pentru Beneficiari (Adolescenti si Tineri)'\n  - 3 Q&A in format identic cu bloc 1:\n    * Q1: 'Nu am mai tinut niciodata o scula sau un aparat in mana. Pot sa ma inscriu?'\n    * Q2: 'Ce se intampla daca aleg un Cerc si imi dau seama ca nu imi place?'\n    * Q3: 'Cum ma ajuta CEIDA sa ma angajez?'\n\nPasi de executie:\n1. Extrage EXACT toate cele 3 Q&A cu raspunsurile complete.\n   ATENTIE: Tonul sectiunii pentru tineri este prietenos si empatic — pastrat EXACT asa cum e in document.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML identic cu bloc 1.\n4. Salveaza in faq-v2/bloc-4-faq-beneficiari.html.",
+      "testStrategy": "Fisierul bloc-4-faq-beneficiari.html exista. Toate cele 3 Q&A pentru Beneficiari prezente cu raspunsurile complete. Tonul prietenos pastrat intact. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [3],
+      "sourceRequirement": "Nu am mai tinut niciodata o scula sau un aparat in mana. Pot sa ma inscriu? Evident! La CEIDA pornim de la zero [...]. Ce se intampla daca aleg un Cerc si imi dau seama ca nu imi place? Schimbi Cercul! Poti experimenta domenii noi [...]. Cum ma ajuta CEIDA sa ma angajez? Prin reteaua de firme partenere. La 17-18 ani intri in Early Insertion si te conectam direct cu companiile locale.",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Confirmare page builder + creare pagina WP draft via REST API",
+      "description": "Confirma cu Ioan tipul de page builder, apoi creaza pagina 'Intrebari Frecvente V2' ca draft WordPress via REST API cu continutul HTML complet.",
+      "details": "PRE-CONDITIE 1: Credentiale REST API disponibile (username + application password de la Ioan).\nPRE-CONDITIE 2: Tipul de page builder al ceida.ro confirmat de Ioan (Elementor / Gutenberg / alt).\n\nIn functie de page builder:\n  - Gutenberg: trimitem HTML standard via campul 'content' din REST API.\n  - Elementor: HTML standard functioneaza daca pagina nu are layout Elementor pre-existent. Verificam dupa creare.\n  - Alt page builder: abordare de discutat cu Ioan.\n\nPasi de executie:\n1. Combina fisierele HTML in ordinea:\n   bloc-1-faq-autoritati.html → bloc-2-faq-companii.html → bloc-3-faq-parinti.html → bloc-4-faq-beneficiari.html\n2. POST la https://ceida.ro/wp-json/wp/v2/pages:\n   Body: { title: 'Intrebari Frecvente V2', slug: 'intrebari-frecvente-v2', status: 'draft', content: '[HTML combinat]' }\n   Headers: { Authorization: 'Basic [base64(username:app_password)]', Content-Type: 'application/json' }\n3. Salveaza ID-ul paginii returnate in metadata.wordpressPageId.\n4. Verifica in wp-admin → Pages → Drafts ca pagina exista cu slug 'intrebari-frecvente-v2'.\n5. Raporteaza: URL preview + ID pagina.\nNOTA: Status ramane 'draft'. Nu se publica fara aprobare Ioan.",
+      "testStrategy": "POST returneaza HTTP 201. Pagina 'Intrebari Frecvente V2' cu slug 'intrebari-frecvente-v2', status 'draft' vizibila in wp-admin. Toate 4 sectiuni FAQ prezente. Ioan confirma.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1, 2, 3, 4],
+      "sourceRequirement": "Sectiunea completa FAQ din document: Autoritati (5 Q&A) + Companii (3 Q&A) + Parinti (4 Q&A) + Beneficiari (3 Q&A) = 15 Q&A totale.",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Verificare finala subproiect faq-v2",
+      "description": "Verificare completa: toate Q&A din document acoperite, diacritice corecte, pagina draft aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea FAQ.\n3. Numara si verifica Q&A-urile per sectiune:\n   - Autoritati Locale: 5 Q&A\n   - Companii: 3 Q&A\n   - Parinti: 4 Q&A\n   - Beneficiari: 3 Q&A\n   TOTAL: 15 Q&A\n4. Compara cuvant cu cuvant fiecare Q&A din WP draft cu documentul. Nota orice diferenta.\n5. Bifaza checklist diacritice pentru toate cele 4 fisiere HTML.\n6. Confirma ca zero text a fost modificat (zero parafrazare, zero adaugiri).\n7. Verifica in wp-admin ca toate sectiunile si Q&A-urile sunt prezente si lizibile.\n8. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-5 au status done. Toate cele 15 Q&A din document prezente in pagina draft. Checklist diacritice bifat. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [5],
+      "sourceRequirement": "Sectiunea completa INTREBARI FRECVENTE (FAQ) din documentul de cerinte — toate Q&A-urile livrate identic, diacritice corecte, structura vizuala conforma.",
+      "subtasks": []
+    }
+  ]
+}

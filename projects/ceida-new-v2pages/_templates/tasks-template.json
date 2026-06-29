@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "projectName": "[Nume Pagina V2]",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "[Sectiunea X din document]",
+    "version": "1.0.0",
+    "created": "YYYY-MM-DD",
+    "updated": "YYYY-MM-DD",
+    "totalTasks": 0,
+    "status": {
+      "pending": 0,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Titlu scurt si actionabil",
+      "description": "Un singur rand — ce trebuie facut, fara detalii.",
+      "details": "Implementare detaliata: abordare tehnica, ce fisiere sunt implicate, cum se integreaza cu WordPress, ce draft se dubleaza, ce structura HTML/CSS se produce. Orice context tehnic necesar executiei.",
+      "testStrategy": "Cum verificam ca task-ul este done — criteriu binar. Ex: pagina draft exista in WordPress cu continutul X, diacriticele sunt corecte, /humanizer a fost aplicat, Ioan a confirmat.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "[Citat exact din documentul de cerinte pentru acest task]",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Titlu subtask",
+          "description": "Ce face acest subtask concret",
+          "details": "",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": 2,
+          "title": "Titlu subtask",
+          "description": "Ce face acest subtask concret",
+          "details": "",
+          "status": "pending",
+          "dependencies": []
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Titlu scurt si actionabil",
+      "description": "Un singur rand — ce trebuie facut.",
+      "details": "Detalii complete de implementare.",
+      "testStrategy": "Criteriu binar de verificare.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [1],
+      "sourceRequirement": "[Citat exact din document]",
+      "subtasks": []
+    }
+  ]
+}

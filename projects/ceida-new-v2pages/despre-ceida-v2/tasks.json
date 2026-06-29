@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "projectName": "Despre CEIDA V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea Despre CEIDA",
+    "version": "2.0.0",
+    "created": "2026-06-27",
+    "updated": "2026-06-27",
+    "totalTasks": 8,
+    "wordpressPageId": null,
+    "status": {
+      "pending": 8,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Hero + Podul spre Viitor",
+      "description": "Extrage din document titlul H1, subtitlul si paragraful introductiv al sectiunii Despre CEIDA. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta (model CEIDA in Lume):\n  - H1: 'Despre CEIDA' — centrat, bold, albastru-mov\n  - Subtitlu H2: 'Podul spre Viitor: Misiunea CEIDA de a Uni Educatia cu Mediul Economic' — centrat, bold, negru\n  - Paragraful introductiv ('CEIDA - Centrul de Excelenta...').\n\nPasi de executie:\n1. Deschide documentul, sectiunea 'Despre CEIDA'.\n2. Copiaza exact: titlu H1, subtitlu si paragraful introductiv 'CEIDA - Centrul de Excelenta...'.\n3. Verifica si corecteaza EXCLUSIV diacriticele (s/t cu virgula jos, a scurt, a/i circumflex). Zero alte modificari.\n4. Formateaza ca HTML: <h1>Despre CEIDA</h1> + <h2 class='subtitle'>[subtitlu]</h2> + <p>[paragraf intro]</p>.\n5. Salveaza in despre-ceida-v2/bloc-1-hero-podul.html.",
+      "testStrategy": "Fisierul bloc-1-hero-podul.html exista. Textul este identic cu documentul. Diacriticele sunt corecte. HTML valid cu H1 + H2 + P.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Despre CEIDA | Podul spre Viitor: Misiunea CEIDA de a Uni Educatia cu Mediul Economic | CEIDA - Centrul de Excelenta in Inovare si Dezvoltare Antreprenoriala este motorul care transforma potentialul uman al comunitatilor noastre in forta economica reala si durabila. Suntem podul care leaga scoala de viata, teoria de practica, talentul de oportunitate.",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: Dinamica CEIDA + Modelul MSCP",
+      "description": "Extrage din document sectiunea 'Dinamica CEIDA' si explicatia modelului MSCP. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Dinamica CEIDA: De unde am plecat si unde mergem'\n  - Paragraf despre evolutia CEIDA (de la Constanta la nivel national).\n  - H2 sau H3: 'Modelul MSCP'\n  - Explicatie cei 4 piloni: Mediu, Social, Cultural, Profesional.\n\nPasi de executie:\n1. Extrage EXACT textul 'Dinamica CEIDA' + paragraful despre crestere + sectiunea 'Modelul MSCP' cu descrierea celor 4 piloni.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML: <h2>Dinamica CEIDA...</h2> + <p>[paragraf]</p> + <h2>Modelul MSCP</h2> + <p>[descriere MSCP]</p> sau <ul> cu cei 4 piloni.\n4. Salveaza in despre-ceida-v2/bloc-2-dinamica-mscp.html.",
+      "testStrategy": "Fisierul bloc-2-dinamica-mscp.html exista. Textul este identic cu documentul. MSCP si cei 4 piloni prezenti. Diacritice corecte.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1],
+      "sourceRequirement": "Dinamica CEIDA: De unde am plecat si unde mergem | De la un proiect local al AFCT in Constanta, CEIDA a crescut [...] | Modelul MSCP: Mediu, Social, Cultural, Profesional — cei patru piloni care definesc ecosistemul educational CEIDA.",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Extragere si pregatire text: Un Model European de Educatie Non-Formala",
+      "description": "Extrage din document sectiunea 'Un Model European de Educatie Non-Formala'. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Un Model European de Educatie Non-Formala'\n  - Paragraf despre pozitionarea CEIDA in contextul european.\n  - Lista sau paragrafe despre ce inseamna modelul european in practica.\n\nPasi de executie:\n1. Extrage EXACT sectiunea 'Un Model European...' cu toate paragrafele.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML: <h2>Un Model European de Educatie Non-Formala</h2> + <p> sau <ul>.\n4. Salveaza in despre-ceida-v2/bloc-3-model-european.html.",
+      "testStrategy": "Fisierul bloc-3-model-european.html exista. Textul este identic cu documentul. Diacritice corecte. HTML valid.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [2],
+      "sourceRequirement": "Un Model European de Educatie Non-Formala | CEIDA nu re-inventeaza roata. Preia cele mai bune practici ale sistemelor educationale europene si le adapteaza la realitatea romaneasca [...]",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Extragere si pregatire text: Viziunea Europeana — 4 subsectiuni",
+      "description": "Extrage din document cele 4 subsectiuni ale 'Viziunii Europene CEIDA'. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Viziunea Europeana CEIDA'\n  - 4 subsectiuni (H3 + paragraf fiecare):\n    1. Invatarea prin practica (Work-Based Learning)\n    2. Educatia incluziva si accesibila\n    3. Parteneriatele public-private solide\n    4. Sustenabilitate si impact masurabil\n\nPasi de executie:\n1. Extrage EXACT titlul sectiunii si toate cele 4 subsectiuni cu textele lor complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML: <h2>Viziunea Europeana CEIDA</h2> + pentru fiecare subsectiune: <h3>[titlu]</h3> + <p>[text]</p>.\n4. Salveaza in despre-ceida-v2/bloc-4-viziunea-europeana.html.",
+      "testStrategy": "Fisierul bloc-4-viziunea-europeana.html exista. Toate cele 4 subsectiuni prezente cu textele complete. Diacritice corecte. HTML valid.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [3],
+      "sourceRequirement": "Viziunea Europeana CEIDA | 1. Invatarea prin practica (Work-Based Learning) [...] | 2. Educatia incluziva si accesibila [...] | 3. Parteneriatele public-private solide [...] | 4. Sustenabilitate si impact masurabil [...]",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Extragere si pregatire text: Inovatie in Educatie + De la Local la National",
+      "description": "Extrage din document sectiunile 'Inovatie in Educatie' si 'De la Local la National'. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Inovatie in Educatie: Cum schimbam regulile jocului'\n  - Paragraf sau lista cu elementele de inovatie CEIDA.\n  - H2: 'De la Local la National'\n  - Paragraf despre expansiunea CEIDA in alte orase/judete.\n\nPasi de executie:\n1. Extrage EXACT cele doua sectiuni cu toate textele.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML: H2 + P pentru fiecare sectiune.\n4. Salveaza in despre-ceida-v2/bloc-5-inovatie-local-national.html.",
+      "testStrategy": "Fisierul bloc-5-inovatie-local-national.html exista. Ambele sectiuni prezente cu textele complete. Diacritice corecte.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [4],
+      "sourceRequirement": "Inovatie in Educatie: Cum schimbam regulile jocului | [...] | De la Local la National | [...]",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Extragere si pregatire text: Manifestul CEIDA + Transparenta si Responsabilitate",
+      "description": "Extrage din document 'Manifestul CEIDA' si sectiunea 'Transparenta si Responsabilitate'. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Manifestul CEIDA: Credinta noastra'\n  - Paragrafele manifestului (text cu forta emotionala — pastrat EXACT).\n  - H2: 'Transparenta si Responsabilitate'\n  - Paragraf sau lista despre cum CEIDA raporteaza impactul.\n\nPasi de executie:\n1. Extrage EXACT textul manifestului si sectiunea de transparenta.\n2. Verifica si corecteaza EXCLUSIV diacriticele. Manifestul are forta retorica — nu se schimba niciun cuvant.\n3. Formateaza ca HTML: H2 + P pentru manifest, H2 + P/UL pentru transparenta.\n4. Salveaza in despre-ceida-v2/bloc-6-manifest-transparenta.html.",
+      "testStrategy": "Fisierul bloc-6-manifest-transparenta.html exista. Manifestul este identic cu documentul (ton retoric pastrat intact). Sectiunea transparenta prezenta. Diacritice corecte.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [5],
+      "sourceRequirement": "Manifestul CEIDA: Credinta noastra | [...text manifest complet...] | Transparenta si Responsabilitate | [...]",
+      "subtasks": []
+    },
+    {
+      "id": 7,
+      "title": "Confirmare page builder + creare pagina WP draft via REST API",
+      "description": "Confirma cu Ioan tipul de page builder, apoi creaza pagina 'Despre CEIDA V2' ca draft WordPress via REST API cu continutul HTML pregatit la task-urile 1-6.",
+      "details": "PRE-CONDITIE 1: Credentiale REST API disponibile (username + application password de la Ioan).\nPRE-CONDITIE 2: Tipul de page builder al ceida.ro confirmat de Ioan (Elementor / Gutenberg / alt).\n\nIn functie de page builder:\n  - Gutenberg: trimitem HTML standard via campul 'content' din REST API.\n  - Elementor: HTML standard functioneaza daca pagina nu are layout Elementor pre-existent. Verificam dupa creare.\n  - Alt page builder: abordare de discutat cu Ioan.\n\nPasi de executie:\n1. Combina fisierele HTML in ordinea:\n   bloc-1-hero-podul.html\n   → bloc-2-dinamica-mscp.html\n   → bloc-3-model-european.html\n   → bloc-4-viziunea-europeana.html\n   → bloc-5-inovatie-local-national.html\n   → bloc-6-manifest-transparenta.html\n2. POST la https://ceida.ro/wp-json/wp/v2/pages:\n   Body: { title: 'Despre CEIDA V2', slug: 'despre-ceida-v2', status: 'draft', content: '[HTML combinat]' }\n   Headers: { Authorization: 'Basic [base64(username:app_password)]', Content-Type: 'application/json' }\n3. Salveaza ID-ul paginii returnate in metadata.wordpressPageId.\n4. Verifica in wp-admin → Pages → Drafts ca pagina exista cu slug 'despre-ceida-v2'.\n5. Raporteaza: URL preview + ID pagina.\nNOTA: Status ramane 'draft'. Nu se publica fara aprobare Ioan.",
+      "testStrategy": "POST returneaza HTTP 201. Pagina 'Despre CEIDA V2' cu slug 'despre-ceida-v2', status 'draft' vizibila in wp-admin. Toate cele 6 blocuri de continut prezente. Ioan confirma.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1, 2, 3, 4, 5, 6],
+      "sourceRequirement": "Toate sectiunile paginii Despre CEIDA: Hero + Podul spre Viitor + Dinamica + MSCP + Model European + Viziunea Europeana (4 subsectiuni) + Inovatie + Local la National + Manifest + Transparenta.",
+      "subtasks": []
+    },
+    {
+      "id": 8,
+      "title": "Verificare finala subproiect despre-ceida-v2",
+      "description": "Verificare completa: text identic cu documentul, diacritice corecte, structura vizuala conforma, pagina draft aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea Despre CEIDA.\n3. Compara cuvant cu cuvant fiecare sectiune fata de blocurile HTML:\n   - bloc-1: Hero + Podul spre Viitor\n   - bloc-2: Dinamica + MSCP\n   - bloc-3: Model European\n   - bloc-4: Viziunea Europeana (4 subsectiuni)\n   - bloc-5: Inovatie + Local la National\n   - bloc-6: Manifest + Transparenta\n4. Verifica checklist diacritice pentru toate blocurile.\n5. Verifica structura vizuala in wp-admin preview: H1 → H2/H3 sectiuni → CTA (daca exista).\n6. Confirma ca textul clientului NU a fost modificat (zero parafrazare).\n7. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-7 au status done. Textul din WP draft este identic cu documentul (diacritice corectate). Structura conforma modelului. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [7],
+      "sourceRequirement": "Sectiunea completa Despre CEIDA din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
+      "subtasks": []
+    }
+  ]
+}

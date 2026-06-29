@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "projectName": "Programe & Impact V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea PROGRAME SI IMPACT",
+    "version": "2.0.0",
+    "created": "2026-06-27",
+    "updated": "2026-06-27",
+    "totalTasks": 5,
+    "wordpressPageId": null,
+    "status": {
+      "pending": 5,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Cercurile CEIDA — 3 categorii + buton",
+      "description": "Extrage din document sectiunea 'Cercurile CEIDA: Dezvoltare prin practica' cu toate cele 3 categorii de cercuri si butonul CTA. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H1: 'Programe & Impact' — centrat, bold, albastru-mov\n  - H2: 'Cercurile CEIDA: Dezvoltare prin practica'\n  - Fraza introductiva: 'Treci de la teorie la actiune in atelierele noastre...'\n  - 3 categorii de cercuri (titlu bold + lista de domenii):\n    * Categoria 1: Cercuri de abilitati tehnice si IT\n      (Electrica, Electronica, Retelistica, Mecanica auto, Robotica, Print 3D, Lacatuserie)\n    * Categoria 2: Cercuri de meserii traditionale\n      (Tamplarie, Croitorie, Tesatorie, Olărit, Biologie-Botanica si Agricultura urbana)\n    * Categoria 3: Cercuri de soft skills si cultura\n      (Leadership, Antreprenoriat, Dezbateri, Fotografie-Video-Media, Teatru, Istorie, Wellbeing)\n  - Buton CTA: 'Inscrie-te intr-un Cerc' — placeholder link, de confirmat cu Ioan.\n\nPasi de executie:\n1. Extrage EXACT fraza introductiva si toate cele 3 categorii cu listele de domenii din document.\n2. Verifica si corecteaza EXCLUSIV diacriticele. Zero alte modificari.\n3. Formateaza ca HTML:\n   <h1>Programe & Impact</h1>\n   <h2>Cercurile CEIDA: Dezvoltare prin practica</h2>\n   <p>[fraza intro]</p>\n   Pentru fiecare categorie: <h3>[titlu categorie]</h3> + <ul><li>[domeniu]</li>...</ul>\n   Buton: <a class='btn' href='#[de-confirmat-cu-Ioan]'>Inscrie-te intr-un Cerc</a>\n4. Salveaza in programe-impact-v2/bloc-1-cercurile-ceida.html.\n\nBLOCKER MINOR: Link-ul butonului 'Inscrie-te intr-un Cerc' nu e specificat in document. Se insereaza ca placeholder — de confirmat cu Ioan.",
+      "testStrategy": "Fisierul bloc-1-cercurile-ceida.html exista. Fraza intro prezenta. Toate cele 3 categorii cu listele complete de domenii prezente. Buton cu placeholder. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Cercuri de abilitati tehnice si IT: Electrica, Electronica, Retelistica, Mecanica auto, Robotica, Print 3D, Lacatuserie. Cercuri de meserii traditionale: Tamplarie, Croitorie, Tesatorie, Olărit, Biologie-Botanica si Agricultura urbana. Cercuri de soft skills si cultura: Leadership, Antreprenoriat, Dezbateri, Fotografie-Video-Media, Teatru, Istorie, Wellbeing. [BUTON] Inscrie-te intr-un Cerc.",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: Ecosistemul Orizontal — 7 programe identitare",
+      "description": "Extrage din document sectiunea 'Ecosistemul Orizontal: Programele Identitare CEIDA' cu toate cele 7 programe. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Ecosistemul Orizontal: Programele Identitare CEIDA'\n  - Fraza introductiva.\n  - 7 programe numerotate (titlu bold + descriere):\n    1. Early Insertion\n    2. Generatia care construieste impreuna (Seniorii CEIDA)\n    3. Actiunea pentru Dual si Profesional-Dual\n    4. Mentor.issim si Smart.issim (Incubatoare de afaceri)\n    5. Com.Union\n    6. Hubbin' by AFCT\n    7. B-UP\n\nPasi de executie:\n1. Extrage EXACT fraza introductiva si toate cele 7 programe cu descrierile complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n   ATENTIE: Denumirile de brand raman intacte — Early Insertion, Mentor.issim, Smart.issim, Com.Union, Hubbin', B-UP.\n3. Formateaza ca HTML:\n   <h2>Ecosistemul Orizontal: Programele Identitare CEIDA</h2>\n   <p>[fraza intro]</p>\n   <ol> cu fiecare program ca <li><strong>[titlu program]</strong>: [descriere]</li></ol>\n4. Salveaza in programe-impact-v2/bloc-2-ecosistemul-orizontal.html.",
+      "testStrategy": "Fisierul bloc-2-ecosistemul-orizontal.html exista. Toate cele 7 programe prezente cu descrierile complete. Denumirile de brand intacte. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1],
+      "sourceRequirement": "1. Early Insertion: Insertie timpurie pe piata muncii. 2. Generatia care construieste impreuna (Seniorii CEIDA): Seniorii, meseriasii cu experienta, devin mentori. 3. Actiunea pentru Dual si Profesional-Dual. 4. Mentor.issim si Smart.issim (Incubatoare de afaceri). 5. Com.Union: Mediere pe piata muncii. 6. Hubbin' by AFCT: Hub de co-working. 7. B-UP: Calificari profesionale si cursuri practice.",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Extragere si pregatire text: Educatie non-formala in scoli si programe de vacanta",
+      "description": "Extrage din document sectiunea cu cele 3 sub-programe (CEIDAnext, Mentorat Profesori, Programe Vacanta). Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Educatie non-formala in scoli si programe de vacanta'\n  - 3 sub-programe (H3 + paragraf fiecare):\n    * CEIDAnext — disciplina optionala pentru gimnaziu si liceu, autocunoastere, orientare in cariera, MSCP.\n    * Mentorat pentru Profesori — formare cadre didactice, discurs MSCP.\n    * Programe de Vacanta, Scoala Altfel si Scoala Verde — tabere urbane, ateliere intensive.\n\nPasi de executie:\n1. Extrage EXACT titlul sectiunii si toate cele 3 sub-programe cu descrierile complete.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n   ATENTIE: Denumirile CEIDAnext, Mentor.issim, Smart.issim raman intacte ca brand.\n3. Formateaza ca HTML:\n   <h2>Educatie non-formala in scoli si programe de vacanta</h2>\n   Pentru fiecare sub-program: <h3>[titlu]</h3> + <p>[descriere]</p>\n4. Salveaza in programe-impact-v2/bloc-3-educatie-nonformala.html.",
+      "testStrategy": "Fisierul bloc-3-educatie-nonformala.html exista. Toate cele 3 sub-programe prezente cu descrierile complete. Textul identic cu documentul. Diacritice corecte.",
+      "status": "pending",
+      "priority": "medium",
+      "dependencies": [2],
+      "sourceRequirement": "CEIDAnext: Disciplina optionala pentru gimnaziu si liceu. Axata pe autocunoastere, orientare in cariera si pilonii MSCP. Mentorat pentru Profesori: Formam cadrele didactice pentru a adopta un discurs axat MSCP si atitudine constructiva la clasa. Programe de Vacanta, Scoala Altfel si Scoala Verde: Transformam timpul liber in invatare experientiala prin tabere urbane si ateliere intensive pentru descoperirea aptitudinilor.",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Confirmare page builder + creare pagina WP draft via REST API",
+      "description": "Confirma cu Ioan tipul de page builder, apoi creaza pagina 'Programe & Impact V2' ca draft WordPress via REST API cu continutul HTML pregatit la task-urile 1-3.",
+      "details": "PRE-CONDITIE 1: Credentiale REST API disponibile (username + application password de la Ioan).\nPRE-CONDITIE 2: Tipul de page builder al ceida.ro confirmat de Ioan (Elementor / Gutenberg / alt).\n\nIn functie de page builder:\n  - Gutenberg: trimitem HTML standard via campul 'content' din REST API.\n  - Elementor: HTML standard functioneaza daca pagina nu are layout Elementor pre-existent. Verificam dupa creare.\n  - Alt page builder: abordare de discutat cu Ioan.\n\nPasi de executie:\n1. Combina fisierele HTML in ordinea:\n   bloc-1-cercurile-ceida.html → bloc-2-ecosistemul-orizontal.html → bloc-3-educatie-nonformala.html\n2. POST la https://ceida.ro/wp-json/wp/v2/pages:\n   Body: { title: 'Programe & Impact V2', slug: 'programe-impact-v2', status: 'draft', content: '[HTML combinat]' }\n   Headers: { Authorization: 'Basic [base64(username:app_password)]', Content-Type: 'application/json' }\n3. Salveaza ID-ul paginii returnate in metadata.wordpressPageId.\n4. Verifica in wp-admin → Pages → Drafts ca pagina exista cu slug 'programe-impact-v2'.\n5. Raporteaza: URL preview + ID pagina.\nNOTA: Status ramane 'draft'. Nu se publica fara aprobare Ioan.",
+      "testStrategy": "POST returneaza HTTP 201. Pagina 'Programe & Impact V2' cu slug 'programe-impact-v2', status 'draft' vizibila in wp-admin. Toate cele 3 blocuri de continut prezente. Ioan confirma.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1, 2, 3],
+      "sourceRequirement": "Toate sectiunile paginii Programe & Impact: Cercurile CEIDA (3 categorii), Ecosistemul Orizontal (7 programe), Educatie non-formala in scoli (3 sub-programe).",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Verificare finala subproiect programe-impact-v2",
+      "description": "Verificare completa: toate cerintele din document acoperite, diacritice corecte, denumiri de brand intacte, pagina draft aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea PROGRAME SI IMPACT.\n3. Verifica fiecare cerinta fata de sourceRequirement + testStrategy din tasks 1-4.\n4. Bifaza checklist diacritice pentru toate cele 3 fisiere HTML.\n5. Confirma ca denumirile de brand sunt intacte (Early Insertion, Mentor.issim, Smart.issim, Com.Union, Hubbin', B-UP, CEIDAnext).\n6. Verifica ca link-ul butonului 'Inscrie-te intr-un Cerc' este clarificat cu Ioan sau marcat ca placeholder.\n7. Verifica in wp-admin ca toate sectiunile sunt prezente si corecte.\n8. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-4 au status done. Fiecare cerinta din document are corespondent verificat. Checklist diacritice bifat. Denumiri de brand intacte. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [4],
+      "sourceRequirement": "Sectiunea completa PROGRAME SI IMPACT din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
+      "subtasks": []
+    }
+  ]
+}

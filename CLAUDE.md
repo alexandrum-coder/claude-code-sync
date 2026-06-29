@@ -46,3 +46,18 @@ If no → that sentence is dead weight. Cut it.
 - Preparing a Cowork or Claude Code pipeline prompt
 - Writing a prompt for an external tool (Cursor, Gemini, Higgsfield, etc.)
 - The prompt failed and you're debugging why
+
+## Frontend Motion & Animation — apply automatically, get this right the first time
+
+These exist because a scroll-reveal system shipped with literally zero working motion — for the whole site, since it was first written — and it took a full debugging session to find, because verification only ever checked settled-state screenshots, which look identical whether something animated into place or just snapped there instantly.
+
+### Tailwind v4: transitions must name `translate`/`scale`/`rotate`, never rely on `transform`
+Tailwind v4 compiles `translate-x-*`, `translate-y-*`, `scale-*`, `rotate-*` utilities to the **native CSS `translate`/`scale`/`rotate` properties** — not to `transform` (a real behavior change from v3, which composed them all into one `transform` value). Writing `transition-[opacity,transform]` when the actual utilities in play are translate/scale utilities means `transform` never changes, so there is nothing to interpolate — the element snaps instantly between states with zero visible motion, while `opacity` (if also listed) still fades normally, which is exactly what makes this bug invisible at a glance.
+- **Rule:** any Tailwind v4 transition/animation using `translate-*`, `scale-*`, or `rotate-*` utilities must list `translate`, `scale`, `rotate` explicitly in the `transition-property` (or `transition-[...]` arbitrary value) — e.g. `transition-[opacity,translate,scale]`. Do not write `transition-transform` or include `transform` in the property list as a stand-in for these utilities in v4; it does nothing.
+- **Verify, don't assume:** before calling motion work done, check `getComputedStyle(el).translate` / `.scale` / `.rotate` / `.transitionProperty` directly — not `.transform`, which will misleadingly read `"none"` even when translate/scale utilities are active and working correctly.
+
+### Scroll-triggered reveal fallback timers must be armed by proximity, not by mount time
+If a reveal/animation system includes a "ship visible even if the IntersectionObserver never fires" safety-net timer, that timer must only start once the element is actually approaching the viewport (e.g. a second IntersectionObserver with a wide `rootMargin`) — never on component mount. A timer started at mount fires for every element on the entire page within a few seconds of page load, regardless of scroll position, silently resolving everything to its final visible state before a human has had time to scroll anywhere near it. On any page taller than one viewport, this makes the entire reveal system invisible while looking, in code review, like it should obviously work.
+
+### The verification standard for any scroll/hover/transition motion
+A snap and a smooth transition produce an identical settled-state screenshot. Never declare animation work complete based on a screenshot or a "looks right" pass alone. Verify the actual interpolation: read the correct `getComputedStyle` property before the state change and after, or add timestamped console logging and inspect the real timeline of when states flip relative to scroll/interaction. If the evidence only ever shows the final state, that is not verification — go get evidence of the transition itself.

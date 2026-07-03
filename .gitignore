@@ -2,3 +2,4 @@
 sessions/
 cache/
 history.jsonl
+.DS_Store

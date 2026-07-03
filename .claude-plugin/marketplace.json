@@ -1,0 +1,17 @@
+{
+  "name": "obsydia",
+  "owner": {
+    "name": "Doru Maican"
+  },
+  "metadata": {
+    "description": "Personal marketplace syncing custom Claude skills across devices.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "obsydia-skills",
+      "source": "./obsydia-skills",
+      "description": "Personal custom skills collection: design, frontend, image-gen, and workflow skills (brandkit, caveman, impeccable, skill-router, theme-factory, and more)."
+    }
+  ]
+}

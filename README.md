@@ -6,6 +6,30 @@ Personal Claude Code skill/plugin config, synced across machines. The originals 
 machine has no admin rights / Developer Mode for real NTFS symlinks, but
 junctions work the same way without elevation).
 
+## Quick start
+
+**Desktop app (Cowork "Code" tab):** custom skills load as an **installed
+plugin** (`obsydia-skills`), *not* from loose `~/.claude/skills/user` folders.
+Exact install/update commands per OS →
+[INSTALL-COMMANDS.md](INSTALL-COMMANDS.md). How it all fits together →
+[SKILLS-SYNC.md](SKILLS-SYNC.md).
+
+**Add a new skill** (from any device where the plugin is installed) — in a Code
+session run:
+
+```
+/obsydia-skills:add-skill <skill-name-or-path>
+```
+
+It copies the skill into `custom-skills/`, regenerates the plugin mirror, bumps
+the version, commits, and pushes. Then **fully restart the desktop app**; on the
+other devices `git pull` + the update block in
+[INSTALL-COMMANDS.md](INSTALL-COMMANDS.md), and restart.
+
+**Claude Code CLI (real terminal):** the loose-folder links under
+`~/.claude/skills/user/` work there independently of the plugin — see the
+"Setting up a second machine" section below.
+
 ## Synced (`custom-skills/`)
 
 | Folder | What it is | Origin |

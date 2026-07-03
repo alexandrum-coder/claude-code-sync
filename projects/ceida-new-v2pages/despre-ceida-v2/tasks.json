@@ -3,13 +3,14 @@
     "projectName": "Despre CEIDA V2",
     "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
     "sourceSection": "Sectiunea Despre CEIDA",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "created": "2026-06-27",
-    "updated": "2026-06-27",
-    "totalTasks": 8,
-    "wordpressPageId": null,
+    "updated": "2026-07-02",
+    "totalTasks": 9,
+    "wordpressPageId": 3964,
+    "_note": "Built 2026-06-29 on page 3964 (clone of despre-afct-v2) via Fusion Builder, from the ACTUAL document (this tasks.json's summaries were outdated). Saved as draft. Pending: Ioan sign-off, optional 'Devino Partener' button, after-grid section is 80% width. Tasks 1-8 status below is STALE (all show pending) — per project memory (project_ceida-v2-pages.md) the page is actually content-complete since 2026-06-29, pending only Ioan's sign-off. Not corrected in this pass (out of scope) — Task 9 (design pass, added 2026-07-02) is accurate and depends on the real content-done state.",
     "status": {
-      "pending": 8,
+      "pending": 9,
       "in-progress": 0,
       "review": 0,
       "done": 0,
@@ -113,6 +114,54 @@
       "dependencies": [7],
       "sourceRequirement": "Sectiunea completa Despre CEIDA din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
       "subtasks": []
+    },
+    {
+      "id": 9,
+      "title": "Design pass: hero + imagini descriptive + restilizare layout (referinta Despre Noi)",
+      "description": "Rebuild hero-ul (foto full-bleed + overlay + titlu/subtitlu/CTA) si restilizare vizuala a intregii pagini aliniat cu stilul https://ceida.ro/despre-noi/, fara nicio modificare de text.",
+      "details": "Plan complet in despre-ceida-v2/plan-design.md. Aprobat de Ioan in sesiunea 2026-07-02 (brainstorming, hero explicit in scope per REGULA 1.0 exceptie aprobata pentru acest task).\n\nREVIZUIT 2026-07-02: pivot de la Media Library (rezolutie mica) la Pexels HD, si de la card alb-translucid la text alb + scrim negru subtil pe coloana (vezi nota tehnica din despre-afct-v2/plan-design.md).\n\nRezumat:\n1. Hero nou: foto full-bleed Pexels 36731538 (instructor + elev, atelier ceramica, 1920x1080) + scrim negru subtil. Titlu 'Despre CEIDA' + subtitlu 'Formam caractere si crestem meseriasi!' (text NESCHIMBAT, ambele ALBE). Buton CTA cyan 'Vezi mai jos ↓' identic pe toate cele 4 pagini.\n2. A doua imagine: Pexels 7692557 (profesoara + eleva, sala colorata, 1920x2880) langa sectiunea 'Podul dintre educatie si piata muncii'.\n3. Restilizare corp: fundaluri alternante pe sectiunile existente (Hero->Podul->Dinamica / Pilonii MSCP 4 carduri / Model European+Viziune+Inovatie / Manifest / Transparenta). Blockquote-ul REAL existent 'Manifestul CEIDA pentru Tineri' -> card-citat cu bara stanga portocalie (pattern 'Misiunea noastra' de pe Despre Noi) — zero text nou, doar restilizare.\n4. Metoda de lucru: Live Builder Avada, Ioan aplica si salveaza (REGULA 0.4).",
+      "testStrategy": "Hero afiseaza foto+scrim+titlu+subtitlu ALBE (text identic cu cel curent) + buton CTA functional. A doua imagine plasata langa Podul dintre educatie si piata muncii. Blockquote-ul Manifestului restilizat ca si card-citat, text neschimbat. Fundaluri alternante vizibile pe sectiuni. Zero cuvinte modificate. Ioan verifica si aproba in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [8],
+      "sourceRequirement": "N/A — sarcina de design pass aprobata de Ioan in sesiunea din 2026-07-02 (chat), referinta de stil: https://ceida.ro/despre-noi/. Nu provine din documentul de cerinte original.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Hero: imagine de fundal + scrim + repozitionare titlu/subtitlu albe",
+          "description": "Seteaza Pexels 36731538 ca background container hero (Cover), adauga scrim negru subtil pe coloana text, repozitioneaza titlul/subtitlul in alb.",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": 2,
+          "title": "Hero: buton CTA 'Vezi mai jos ↓'",
+          "description": "Adauga buton cyan care deruleaza spre prima sectiune de continut.",
+          "status": "pending",
+          "dependencies": [1]
+        },
+        {
+          "id": 3,
+          "title": "Imagine corp langa 'Podul dintre educatie si piata muncii'",
+          "description": "Plaseaza Pexels 7692557 (profesoara+eleva) langa aceasta sectiune.",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": 4,
+          "title": "Restilizare Manifest ca si card-citat",
+          "description": "Blockquote-ul existent al Manifestului CEIDA pentru Tineri devine card alb cu bara stanga portocalie, text neschimbat.",
+          "status": "pending",
+          "dependencies": []
+        },
+        {
+          "id": 5,
+          "title": "Restilizare fundaluri sectiuni + carduri MSCP",
+          "description": "Aplica fundaluri alternante pe toate sectiunile existente si polish pe grid-ul de 4 carduri MSCP.",
+          "status": "pending",
+          "dependencies": [1]
+        }
+      ]
     }
   ]
 }

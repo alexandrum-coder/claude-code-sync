@@ -3,16 +3,16 @@
     "projectName": "Despre AFCT V2",
     "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
     "sourceSection": "Sectiunea Despre AFCT",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "created": "2026-06-27",
-    "updated": "2026-06-27",
-    "totalTasks": 5,
+    "updated": "2026-07-02",
+    "totalTasks": 6,
     "wordpressPageId": 3953,
     "status": {
-      "pending": 1,
-      "in-progress": 1,
-      "review": 0,
-      "done": 3,
+      "pending": 0,
+      "in-progress": 0,
+      "review": 2,
+      "done": 4,
       "blocked": 0,
       "cancelled": 0
     }
@@ -60,7 +60,7 @@
       "description": "Introduce in pagina draft 'Despre AFCT V2' (ID 3953) toate cele 3 blocuri de continut pregatite la task-urile 1-3, folosind EXCLUSIV Fusion Builder UI. Ioan executa in builder, eu ghidez pas cu pas.",
       "details": "METODA: Fusion Builder UI — Ioan executa, eu ghidez. EU NU SALVEZ NICIODATA.\n\nPRE-CONDITIE: Tasks 1, 2, 3 au status done. Fisierele bloc-1-titlu-intro.html, bloc-2-experienta-afct.html, bloc-3-viziunea.html exista si sunt verificate.\n\nPagina de lucru: https://ceida.ro/wp-admin/post.php?post=3953&action=edit\n\nPasi de executie (ghidez Ioan pas cu pas, un element la rand):\n1. Raportez lui Ioan textul exact de introdus pentru fiecare element Fusion Builder.\n2. Ioan localizeaza elementul corespunzator in Fusion Builder (titlu, subtitlu, paragraf, etc.).\n3. Ioan editeaza textul elementului cu textul din fisierele HTML pregatite.\n4. Dupa fiecare element editat: Ioan verifica in previzualizare.\n5. Dupa verificare OK: Ioan salveaza si ma anunta.\n6. Trec la urmatorul element.\n\nOrdinea editarii:\n  - Bloc 1: H1 Titlu + H2 Subtitlu + paragraf(e) intro (din bloc-1-titlu-intro.html)\n  - Bloc 2: H2 Experienta AFCT + cele 5 categorii (din bloc-2-experienta-afct.html)\n  - Bloc 3: H2 Viziunea noastra + paragraf + CTA (din bloc-3-viziunea.html)\n\nNOTA: Nu se modifica header, hero sau footer. Nu se publica draft-ul fara aprobare scrisa Ioan.",
       "testStrategy": "Toate elementele de text din pagina draft ID 3953 corespund exact cu fisierele HTML pregatite (bloc 1+2+3). Ioan confirma vizual in previzualizare Fusion Builder ca textul este corect si structura respecta modelul CEIDA in Lume.",
-      "status": "in-progress",
+      "status": "done",
       "priority": "high",
       "dependencies": [1, 2, 3],
       "sourceRequirement": "Toate sectiunile paginii Despre AFCT: titlu + subtitlu + intro + Experienta AFCT (5 categorii) + Viziunea noastra + CTA.",
@@ -72,11 +72,56 @@
       "description": "Verificare completa: text identic cu documentul, diacritice corecte, structura vizuala conforma modelului site, pagina draft vizibila si aprobata de Ioan.",
       "details": "1. Ruleaza task-master list — confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea Despre AFCT.\n3. Compara cuvant cu cuvant textul din pagina WordPress draft cu documentul. Nota orice diferenta.\n4. Verifica checklist diacritice pentru toate cele 3 blocuri HTML.\n5. Verifica structura vizuala in wp-admin preview: H1 titlu → subtitlu → intro → sectiune Experienta (5 cat.) → Viziunea + CTA.\n6. Confirma ca textul clientului NU a fost modificat (zero parafrazare, zero humanizer).\n7. Raporteaza per cerinta: 'Cerinta [X] → Task [ID] → done | TestStrategy: verificat'.",
       "testStrategy": "Toate task-urile 1-4 au status done. Textul din WP draft este identic cu documentul (exceptie: diacritice corectate). Structura pagina conforma modelului. Ioan aproba subproiectul in scris.",
-      "status": "pending",
+      "status": "review",
       "priority": "high",
       "dependencies": [4],
       "sourceRequirement": "Sectiunea completa Despre AFCT din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
       "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Design pass: hero + imagini descriptive + restilizare layout (referinta Despre Noi)",
+      "description": "Rebuild hero-ul (foto full-bleed + overlay + titlu/subtitlu/CTA) si restilizare vizuala a intregii pagini aliniat cu stilul https://ceida.ro/despre-noi/, fara nicio modificare de text.",
+      "details": "Plan complet in despre-afct-v2/plan-design.md. Aprobat de Ioan in sesiunea 2026-07-02 (brainstorming, hero explicit in scope per REGULA 1.0 exceptie aprobata pentru acest task).\n\nREVIZUIT 2026-07-02: prima incercare a folosit `blog-career-growth.jpg` (Media Library, 845x528 - pixelata) + card alb-translucid in spatele textului. AMBELE decizii respinse de Ioan (vrea poze HD si text alb DIRECT pe poza, nu in card). Corectat: imagine noua Pexels 8467275 (1920x1282, `_assets/stock-photos/despre-afct-v2-hero-8467275.jpg`), text alb + scrim negru subtil pe coloana (rgba(0,0,0,~0.35), NU card opac).\n\nRezumat:\n1. Hero nou: container full-bleed cu imagine de fundal noua (Pexels 8467275) + scrim negru subtil pe coloana text. Titlu 'Despre AFCT' + subtitlu 'Misiunea educationala AFCT: Puntea de legatura intre Educatie si Mediul de Afaceri' (text NESCHIMBAT, ambele ALBE, doar repozitionat/restilizat). Buton CTA cyan '#27C4E5' text 'Vezi mai jos ↓' care deruleaza spre prima sectiune de continut (identic pe toate cele 4 pagini din pass-ul curent, tratat ca UI chrome).\n2. Imagine in corp: portretul real al fondatorului `Ciprian-Lepadatu-AFCT` (Media Library, 1080x1081, rezolutie OK) plasat boxat langa paragraful introductiv Despre AFCT, FARA legenda/caption (decizie explicita Ioan).\n3. Restilizare corp pagina: fundaluri alternante alb -> verde-menta (#F3FBF5) -> gri deschis (#F7F7F7) pe cele 3 sectiuni existente (Intro / Experienta AFCT 5 carduri / Viziunea+CTA). Bullet-uri -> iconita '+' cyan daca aplicabil. Cele 5 carduri categorie -> polish spacing/shadow/corner-radius (6-8px). Buton 'Fii parte din schimbare!' -> restilizat cyan-fill sau outline conform tokenilor Despre Noi.\n4. Metoda de lucru: Live Builder Avada, Ioan aplica si salveaza (REGULA 0.4) sau Claude ghideaza/aplica cu sesiunea activa a lui Ioan conform metodei agreate in sesiune — de confirmat la inceputul executiei.\n5. Nota: bug de randare intermitent observat pe titlul H2 'Despre AFCT' (stil highlight) la research — se rezolva de la sine odata ce hero-ul e inlocuit, nu necesita fix separat.",
+      "testStrategy": "Hero afiseaza foto+scrim+titlu+subtitlu ALBE (text identic cu cel curent) + buton CTA functional (deruleaza la prima sectiune). Imaginea Ciprian apare langa intro, fara text nou/caption. Cele 3 sectiuni de continut au fundaluri alternante vizibile. Zero cuvinte din text modificate fata de versiunea aprobata anterior (task 1-3). Ioan verifica vizual in Live Builder preview si aproba in scris inainte de salvare finala.",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [5],
+      "sourceRequirement": "N/A — sarcina de design pass aprobata de Ioan in sesiunea din 2026-07-02 (chat), referinta de stil: https://ceida.ro/despre-noi/. Nu provine din documentul de cerinte original.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Hero: imagine de fundal + scrim + repozitionare titlu/subtitlu albe",
+          "description": "Seteaza Pexels 8467275 ca background container hero (Cover), adauga scrim negru subtil pe coloana text, repozitioneaza titlul/subtitlul in alb peste imagine.",
+          "details": "APLICAT 2026-07-02. Descoperire tehnica in timpul aplicarii: containerul original 'Intro Section' avea titlu+subtitlu+cele 2 paragrafe introductive TOATE in aceeasi coloana (nu doar titlu+subtitlu cum presupunea planul initial) — structura reala a paginii nu separa hero de paragrafele intro. BLOCAT, raportat lui Ioan cu 3 optiuni; Ioan a ales sa despart containerul in 2 (vezi subtask 3). Titlul H2 'Despre AFCT' folosea stilul Avada 'Highlight' (animat) care nu accepta culoare alba pe portiunea de text principal (doar pe underline) — schimbat Title Type din 'Highlight' in 'Text' simplu, apoi retastat textul exact 'Despre AFCT' (campul se goleste la schimbarea de tip). Subtitlul avea culoare reala rgb(68,68,68) desi parea alb vizual pe poza — corectat explicit la #ffffff si verificat via getComputedStyle.\n\nCORECTIE 2026-07-02 (raportata de Ioan cu screenshot): poza din hero era vizibil pixelata in preview live (?preview=true). Cauza gasita: campul de background image din Fusion Builder NU are selector de marime (spre deosebire de inserarea standard de imagine in continut) si insereaza implicit marimea WordPress 'medium' (300x200) generata automat, chiar daca fisierul original e 1920x1282. Corectat setand direct valoarea campului ascuns #background_image (id, clasa fusion-builder-upload-field) la URL-ul imaginii marime completa (.../despre-afct-v2-hero-8467275.jpg, fara sufix de marime). Verificat prin getComputedStyle(container).backgroundImage si vizual — poza e acum clara/HD. Recomandare: verificat aceeasi eroare pe celelalte 3 pagini cand ajungem la ele (fix sistemic Fusion Builder, nu specific acestei imagini).",
+          "status": "done",
+          "dependencies": []
+        },
+        {
+          "id": 2,
+          "title": "Hero: buton CTA 'Vezi mai jos ↓'",
+          "description": "Adauga buton cyan care deruleaza spre prima sectiune de continut.",
+          "details": "APLICAT 2026-07-02 (dupa ce Ioan a confirmat explicit ca vrea butonul, chiar daca layout-ul s-a schimbat intre timp — hero = doar titlu+subtitlu). Inserat element Button in coloana hero (Intro Section > Column 1/1), imediat sub Text Block-ul subtitlu, via 'Add Element Below' din Navigator + libraria de elemente. Text buton 'Vezi mai jos ↓' (element_content). Culoarea implicita a temei era deja exact #27C4E5 (rgb 39,196,229) cu text alb — verificat via getComputedStyle, nu a fost nevoie de override de culoare. Link ancora '#afct-intro'; setat ID-ul 'afct-intro' pe containerul cu paragrafele intro (containerul 'Container', campul id) ca tinta de scroll — verificat ca #afct-intro exista in DOM. Aliniere buton = center (optiunea 'alignment' a butonului), la cererea lui Ioan, ca sa fie centrat sub titlu+subtitlu (nu stanga). NOTA: tema aplica text-transform capitalize butoanelor, deci se afiseaza 'Vezi Mai Jos ↓' desi textul sursa e 'Vezi mai jos ↓' (stil vizual, nu modificare de text) — de confirmat cu Ioan daca vrea lowercase.",
+          "status": "done",
+          "dependencies": [1]
+        },
+        {
+          "id": 3,
+          "title": "Imagine corp: portret Ciprian langa intro",
+          "description": "Plaseaza imaginea Ciprian-Lepadatu-AFCT boxata langa paragraful introductiv, fara caption.",
+          "details": "APLICAT 2026-07-02, impreuna cu rezolvarea blocajului de structura de la subtask 1. Creat container nou Fusion Builder (layout 1/3 - 2/3) imediat sub hero, inainte de sectiunea 'Experienta AFCT'. Coloana 1/3: imagine Ciprian-Lepadatu-AFCT (1080x1081, deja in Media Library). Coloana 2/3: Text Block nou cu cele 2 paragrafe introductive, text copiat exact din vechiul Text Block (verificat caracter cu caracter din campul Text/HTML sursa al editorului, nu retastat din ecran) inainte de a-l sterge din hero. Fundal container nou: alb (implicit), text negru (nemodificat). Text Block-ul original (duplicat) a fost sters din coloana hero dupa confirmarea ca noul text block afiseaza identic.\n\nCORECTIE 2026-07-02: Ioan a sters el insusi coloana cu imaginea Ciprian (decizie proprie, salvata pe partea lui) — pagina a ramas cu o singura coloana de text la 2/3 latime, cu spatiu gol dezechilibrat pe dreapta. Raportat de Ioan cu cerere explicita de aranjare + centrare + spatiere. Corectat: coloana de text redimensionata de la 2/3 la 1/1 (latime completa) folosind badge-ul de fractie latime din toolbar-ul coloanei (dropdown-ul de fractii 1/6...1/1) — verificat via getComputedStyle si prin proprietatea CSS --awb-width-large:100% ca s-a aplicat corect, fara coloane goale ramase (verificat in Navigator: Container -> Column 1/1 -> Text Block, o singura coloana). Adaugat padding-top:70px si padding-bottom:60px pe container (camp de tip 'dimension' clasic Fusion Builder — necesita valoarea introdusa CU unitatea explicit, ex. '70px', nu doar '70', altfel variabila CSS custom --awb-padding-top se scrie fara unitate si nu se aplica vizual) pentru spatiu vizibil intre poza hero si textul de dedesubt. Imaginea Ciprian NU mai apare in aceasta sectiune (eliminata de Ioan) — plan-design.md actualizat sa reflecte acest layout final (text full-width, fara imagine alaturata).",
+          "status": "done",
+          "dependencies": []
+        },
+        {
+          "id": 4,
+          "title": "Restilizare fundaluri sectiuni + carduri + buton CTA final",
+          "description": "Aplica fundaluri alternante pe cele 3 sectiuni, polish carduri categorie, restilizeaza butonul 'Fii parte din schimbare!'.",
+          "details": "APLICAT 2026-07-02.\n1. FUNDALURI ALTERNANTE: setat prin campul background_color al fiecarui container (jQuery(el).val('#HEX').trigger('change') — functioneaza pentru colorpickeralpha, spre deosebire de padding care cere unitate). Ritm final (excluzand hero-foto si footer): intro paragrafe (container 'Container') = alb (nemodificat) -> Experienta AFCT / cardurile (container 'Subjects') = verde-menta #F3FBF5 (verificat rgb 243,251,245) -> Viziunea noastra (container 'Learn Faster') = gri deschis #F7F7F7 (verificat rgb 247,247,247). Toate verificate via getComputedStyle in iframe.\n2. CARDURI: cele 5 carduri categorie (ScOLI/ELEVI/PARINTI/FIRME/COMUNITATI LOCALE) erau DEJA bine stilizate (fundal alb, colturi rotunjite, umbra subtila, pastile de categorie verzi/mov) — nu au necesitat polish suplimentar; arata coerent pe noul fundal menta.\n3. 'FII PARTE DIN SCHIMBARE!': la inspectie era doar text bold (<p><strong>) intr-un Text Block, NU buton/link. Ioan a decis explicit (AskUserQuestion 2026-07-02) sa ramana TEXT ACCENTUAT, nu buton (nu avea oricum destinatie de link). Aplicat accent doar-stil via inlocuire tintita in element_content (adaugat style='color:#27c4e5;font-size:20px;margin-top:1.2em' pe paragraful CTA), pastrand textul byte-cu-byte si fara sa ating paragraful 'Credem...'. Verificat: text neschimbat (o singura aparitie), randat cyan #27C4E5 / 20px / margin-top 24px.",
+          "status": "done",
+          "dependencies": [1]
+        }
+      ]
     }
   ]
 }

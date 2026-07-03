@@ -124,7 +124,11 @@ Aceste pagini nu se ating, nu se analizeaza ca target, nu se modifica, nu se dis
     - Redirectioneaza 3,5% — /sustine/redirectioneaza-3-5
     - Redirectioneaza 20% — /sustine/redirectioneaza-20
 
-Daca orice task sau cerinta din document pare sa implice aceste pagini:
+Extensie confirmata 2026-07-01: regula acopera si obiectele WordPress asociate acestor pagini,
+nu doar paginile in sine — de exemplu formularul Avada "Doneaza" (fusion_form ID 3494).
+Nu se citeste, nu se editeaza, nu se cloneaza, nu se foloseste ca referinta/model pentru alte formulare.
+
+Daca orice task sau cerinta din document pare sa implice aceste pagini sau obiectele lor asociate:
 OPRESTI, raportezi, astepti clarificare de la Ioan.
 
 ---

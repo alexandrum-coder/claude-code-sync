@@ -1,0 +1,138 @@
+{
+  "metadata": {
+    "projectName": "Parteneriate V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "Sectiunea PARTENERIATE (B2B, Autoritati, Voluntariat), paragrafele 77-99",
+    "version": "1.1.0",
+    "created": "2026-07-01",
+    "updated": "2026-07-02",
+    "totalTasks": 6,
+    "wordpressPageId": 4019,
+    "cloneSource": "despre-ceida-v2 (draft 4019 a fost clonat din despre-ceida-v2, nu din CEIDA in Lume). Redenumit 2026-07-01 de Claude: titlu 'despre-ceida-v2 ( Cloned )' -> 'Parteneriate V2', slug 'despre-ceida-v2-cloned' -> 'parteneriate-v2'. Hero/header/footer neatinse (mostenite din despre-ceida-v2, respecta modelul vizual CEIDA in Lume).",
+    "priority_marcaj": "FARA marcaj rosu in document (bold negru) - subproiect din categoria DUPA PRIORITATI conform REGULA 1.5 din CLAUDE.md",
+    "blockers": [
+      "Cele 3 linkuri de buton (Solicita parteneriatul / Devino Partener AFCT / Vreau sa devin Mentor) nu au URL specificat in document. De clarificat cu Ioan: exista formulare deja create pt fiecare, sau se folosesc anchore catre sectiunea CONTACT (unde exista deja butoane similare: Formular Comunitati/Primarii, Formular Companii, Formular Mentori/Voluntari)?"
+    ],
+    "status": {
+      "pending": 1,
+      "in-progress": 0,
+      "review": 0,
+      "done": 5,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Hero + sectiunea Pentru Primarii",
+      "description": "Extrage titlul paginii si prima sectiune (Pentru Primarii) cu cele 4 beneficii si butonul aferent. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H1: 'Parteneriate' (titlu pagina, de confirmat forma exacta cu Ioan - documentul are 'PARTENERIATE (B2B, Autoritati, Voluntariat)' ca eticheta interna, nu neaparat H1 literal)\n  - H2: 'Pentru Primarii: Transformati localitatea intr-un hub economic'\n  - Paragraf intro: 'Aducerea modelului CEIDA in comunitatea dumneavoastra este o politica publica orientata direct spre crestere economica, inovatie si prosperitate locala.' + 'Prin implementarea ecosistemului CEIDA, administratia locala beneficiaza de solutii strategice imediate:'\n  - Lista/carduri 4 beneficii (fiecare: titlu bold + descriere):\n    1. Crearea unei baze solide de specialisti: Crestem semnificativ numarul profesionistilor tehnici calificati din localitate. O comunitate cu specialisti tehnici buni este o comunitate care prospera!\n    2. Stimularea antreprenoriatului local: Tinerii si adultii formati nu devin doar angajati. Multi vor deschide noi companii de servicii tehnice, generand noi locuri de munca si venituri la bugetul local.\n    3. Magnet pentru noi investitii: Companiile mari cauta forta de munca pregatita si serioasa. CEIDA va ajuta sa puneti localitatea pe harta investitorilor.\n    4. Atragerea fondurilor europene: Modelul nostru va aliniaza direct la strategiile europene (Pact for Skills).\n  - Buton: 'Solicita parteneriatul CEIDA pentru localitatea ta' [BLOCKER link]\n\nPasi de executie:\n1. Extrage EXACT tot textul din document, sectiunea Pentru Primarii.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML.\n4. Salveaza in parteneriate-v2/bloc-1-primarii.html.",
+      "testStrategy": "Fisierul bloc-1-primarii.html exista. Titlu sectiune, paragraf intro, cele 4 beneficii si butonul prezente, text identic cu documentul, diacritice corecte.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Pentru Primarii: Transformati localitatea intr-un hub economic. Aducerea modelului CEIDA in comunitatea dumneavoastra este o politica publica orientata direct spre crestere economica, inovatie si prosperitate locala. Prin implementarea ecosistemului CEIDA, administratia locala beneficiaza de solutii strategice imediate: Crearea unei baze solide de specialisti [...]. Stimularea antreprenoriatului local [...]. Magnet pentru noi investitii [...]. Atragerea fondurilor europene [...]. [BUTON] Solicita parteneriatul CEIDA pentru localitatea ta",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Extragere si pregatire text: sectiunea Pentru Companii",
+      "description": "Extrage sectiunea Pentru Companii cu cele 3 beneficii si butonul aferent. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Pentru Companii: Formati-va viitoarea forta de munca'\n  - Paragraf intro: 'Nu asteptati ca piata sa va livreze specialisti. Formati-i prin CEIDA! Lipsa personalului calificat se rezolva prin implicare directa in educatia tehnica.'\n  - Lista/carduri 3 beneficii:\n    1. Recrutare prin Early Insertion: Aveti acces direct la tineri formati, care cunosc valoarea muncii si a seriozitatii.\n    2. Sustenabilitate si ESG: Sustinerea CEIDA indeplineste obiectivele de responsabilitate sociala corporativa, a obiectivelor ESG cu impact masurabil local si recunoastere europeana.\n    3. Facilitati Fiscale: Directionati 20% din impozitul pe profit/venit pentru sustinerea CEIDA, inclusiv pentru dotarea atelierelor care va vor pregati viitorii angajati.\n  - Buton: 'Devino Partener AFCT' [BLOCKER link]\n\nPasi de executie:\n1. Extrage EXACT tot textul din document, sectiunea Pentru Companii.\n   NOTA: documentul are un typo de spatiere 'pentrusustinerea' -> corecteaza la 'pentru sustinerea' (eroare gramaticala evidenta, permis de REGULA limba romana).\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML.\n4. Salveaza in parteneriate-v2/bloc-2-companii.html.",
+      "testStrategy": "Fisierul bloc-2-companii.html exista. Titlu, intro, cele 3 beneficii si butonul prezente, text identic cu documentul (cu corectia de spatiere), diacritice corecte.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [1],
+      "sourceRequirement": "Pentru Companii: Formati-va viitoarea forta de munca. Nu asteptati ca piata sa va livreze specialisti. Formati-i prin CEIDA! [...]. Recrutare prin Early Insertion [...]. Sustenabilitate si ESG [...]. Facilitati Fiscale: Directionati 20% din impozitul pe profit/venit pentrusustinerea CEIDA [...]. [BUTON] Devino Partener AFCT",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Extragere si pregatire text: sectiunea Pentru Mentori",
+      "description": "Extrage sectiunea Pentru Mentori cu cele 5 obiectii/raspunsuri (format FAQ) si butonul aferent. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta:\n  - H2: 'Pentru Mentori: Experienta ta le poate schimba viata'\n  - Paragraf intro: 'Vrei sa ajuti, dar eziti? Am auzit aceste temeri si avem raspunsurile:'\n  - 5 perechi obiectie(citat)/raspuns, format similar accordion/FAQ:\n    1. „Nu sunt profesor” -> Nici nu trebuie. Tinerii au nevoie de oameni normali, nu de „experti intangibili”.\n    2. „Mi-e teama ca nu voi sti ce sa le spun” -> Nu trebuie sa tii discursuri. O intrebare bine pusa sau o poveste sincera valoreaza mai mult decat o lectie perfecta. CEIDA te ajuta, te indruma, te sustine, iti da manualul, tu aduci experienta.\n    3. „Nu vreau birocratie si rigiditate” -> Nici noi. CEIDA este un spatiu viu, flexibil. Ne adaptam oamenilor, nu invers.\n    4. „Nu stiu daca ceea ce fac eu chiar conteaza” -> Conteaza enorm. Pentru un tanar, intalnirea cu un adult care il asculta si il respecta poate fi un punct de cotitura. Impactul tau ramane o viata.\n    5. „Am mai fost in proiecte care s-au stins” -> CEIDA se construieste pe continuitate (AFCT si ProEdu). Avem structura, firme care ne sustin si parteneriate solide.\n  - Buton: 'Vreau sa devin Mentor' [BLOCKER link]\n\nATENTIE ghilimele: foloseste ghilimele romanesti curbe joase-sus „...” (nu drepte \"...\") pentru citatele obiectiilor, conform stilului documentului.\n\nPasi de executie:\n1. Extrage EXACT tot textul, sectiunea Pentru Mentori.\n2. Verifica si corecteaza EXCLUSIV diacriticele si ghilimelele.\n3. Formateaza ca HTML (accordion sau Q&A simplu, similar stilului folosit la faq-v2).\n4. Salveaza in parteneriate-v2/bloc-3-mentori.html.",
+      "testStrategy": "Fisierul bloc-3-mentori.html exista. Toate 5 perechi obiectie/raspuns prezente cu textul complet, butonul prezent, text identic cu documentul, diacritice si ghilimele corecte.",
+      "status": "done",
+      "priority": "medium",
+      "dependencies": [2],
+      "sourceRequirement": "Pentru Mentori: Experienta ta le poate schimba viata. Vrei sa ajuti, dar eziti? Am auzit aceste temeri si avem raspunsurile: „Nu sunt profesor” [...]. „Mi-e teama ca nu voi sti ce sa le spun” [...]. „Nu vreau birocratie si rigiditate” [...]. „Nu stiu daca ceea ce fac eu chiar conteaza” [...]. „Am mai fost in proiecte care s-au stins” [...]. [BUTON] Vreau sa devin Mentor",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Aplicare continut in Fusion/Live Builder pe draft-ul clonat",
+      "description": "Dupa ce Ioan cloneaza pagina si furnizeaza link-ul, aplica cele 3 blocuri de continut (Primarii, Companii, Mentori) in structura paginii draft, respectand modelul vizual CEIDA in Lume.",
+      "details": "PRE-CONDITIE: Ioan a clonat pagina (butonul Clone pe 'CEIDA in Lume' sau alta pagina sursa) si a furnizat link-ul draft-ului catre Claude.\n\nStructura pagina (in ordine):\n  1. H1 titlu 'Parteneriate' + subtitlu (daca exista in document - de verificat, posibil sa nu existe subtitlu explicit)\n  2. Sectiunea Pentru Primarii (bloc-1)\n  3. Sectiunea Pentru Companii (bloc-2)\n  4. Sectiunea Pentru Mentori (bloc-3, format FAQ/accordion)\n\nMetoda: Avada Fusion/Live Builder condus prin browser-harness, conform metodei aprobate in acest proiect. NU salvez eu - Ioan verifica si salveaza (vezi feedback_avada-live-builder-never-autosave).\nCele 3 butoane raman fara link functional pana la clarificarea blocker-ului (optional: link catre ancora #contact sau catre formularul corespunzator din contact-v2, daca Ioan aproba aceasta solutie la momentul respectiv).\nNU se ating: header, hero/Page Title Bar, footer.",
+      "testStrategy": "Draft-ul WordPress contine toate 3 sectiuni cu text identic cu documentul, structura vizuala conforma modelului CEIDA in Lume. Ioan verifica in builder.",
+      "rezultat": "DONE 2026-07-01. Ioan a salvat. Verificat pe frontend real (parteneriate-v2/?preview=true): H1='PARTENERIATE (B2B, Autoritati, Voluntariat)', 4 headings (H1+3 sectiuni), 5 accordion-uri <details> Pentru Mentori toate prezente, 3 butoane (Solicita parteneriatul.../Devino Partener AFCT/Vreau sa devin Mentor). Structura confirmata identica cu documentul.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [1, 2, 3],
+      "sourceRequirement": "Sectiunea completa PARTENERIATE din documentul de cerinte.",
+      "subtasks": []
+    },
+    {
+      "id": 5,
+      "title": "Verificare finala subproiect parteneriate-v2",
+      "description": "Verificare completa: tot continutul din document acoperit, diacritice corecte, pagina draft aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list - confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea PARTENERIATE.\n3. Compara cuvant cu cuvant fiecare sectiune din WP draft cu documentul.\n4. Bifeaza checklist diacritice pentru toate fisierele HTML.\n5. Confirma ca zero text a fost modificat (zero parafrazare, zero adaugiri).\n6. Confirma header/hero/footer neatinse.\n7. Raporteaza per cerinta: 'Cerinta [X] -> Task [ID] -> done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-4 au status done. Tot continutul din document prezent in pagina draft. Checklist diacritice bifat. Ioan aproba subproiectul in scris.",
+      "rezultat": "VERIFICAT 2026-07-01 pe frontend real (parteneriate-v2/?preview=true). Text vizibil + cele 5 raspunsuri din accordion (extrase din DOM) comparate cuvant-cu-cuvant cu documentul - identice (inclusiv corectia de spatiere aprobata 'pentru sustinerea'). Diacritice: zero ş/ţ cu sedila gasite, toate ș/ț cu virgula corecte. Header (nav neschimbat) si footer (logo/contact/social/PNRR) confirmate intacte. STRUCTURA: H1 + 3 sectiuni (Primarii/Companii/Mentori) + footer, conform modelului. FIX SPATIERE (post-verificare, sesizat de Ioan din screenshot): container-ul sectiunii Mentori (fost 'Learn Faster') avea padding-top 96px mostenit din despre-ceida-v2 (unde separa de grila MSCP stearsa) - redus la 24px in Container Options > Design > Padding. Verificat dupa Save: padding-top=24px persista pe frontend, spatiere consistenta cu restul paginii. Blocker ramas: URL-urile celor 3 butoane, de discutat separat.",
+      "status": "done",
+      "priority": "high",
+      "dependencies": [4],
+      "sourceRequirement": "Sectiunea completa PARTENERIATE din documentul de cerinte - tot continutul livrat identic, diacritice corecte, structura vizuala conforma.",
+      "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Design pass: hero + imagini descriptive (stock nou) + restilizare layout (referinta Despre Noi)",
+      "description": "Rebuild hero-ul (foto full-bleed + overlay + titlu/CTA) si restilizare vizuala a intregii pagini aliniat cu stilul https://ceida.ro/despre-noi/, fara nicio modificare de text.",
+      "details": "Plan complet in parteneriate-v2/plan-design.md. Aprobat de Ioan in sesiunea 2026-07-02 (brainstorming, hero explicit in scope per REGULA 1.0 exceptie aprobata pentru acest task).\n\nATENTIE: a doua pagina (impreuna cu programe-impact-v2) unde Media Library NU are nicio poza tematic potrivita (nimic despre B2B/autoritati/voluntariat). Ioan a aprobat explicit sursa noua: stock cu licenta libera (Unsplash/Pexels), 2 poze, FIECARE cu aprobare explicita pe fisier (nume, sursa, dimensiune) inainte de descarcare.\n\nRezumat:\n1. Hero nou: foto stock noua (tema intalnire de afaceri/oficiali locali/parteneriat B2B) + overlay gradient. Titlu 'PARTENERIATE (B2B, Autoritati, Voluntariat)' (text NESCHIMBAT, FARA subtitlu - decizie deja aprobata anterior). Buton CTA cyan 'Vezi mai jos ↓' identic pe toate cele 4 pagini.\n2. A doua imagine stock noua (tema voluntariat/comunitate sau mentorat) langa sectiunea 'Pentru Companii' sau 'Pentru Mentori'.\n3. Restilizare corp: fundaluri alternante pe cele 3 sectiuni existente (Pentru Primarii / Pentru Companii / Pentru Mentori). Accordion-ul cu 5 perechi obiectie/raspuns ramane FUNCTIONAL, doar restilizat vizual (card alb, shadow, spacing) - zero modificare continut. Cele 3 butoane CTA restilizate vizual (culoare/forma) - URL-urile raman #  (blocker separat, nelegat de acest task).\n4. Metoda de lucru: Live Builder Avada, Ioan aplica si salveaza (REGULA 0.4).",
+      "testStrategy": "Hero afiseaza foto stock (aprobata explicit inainte de descarcare) + overlay + titlu (text identic, fara subtitlu) + buton CTA functional. A doua imagine stock plasata langa Companii sau Mentori. Accordion Pentru Mentori ramane functional (5 perechi intacte). Fundaluri alternante vizibile. Zero cuvinte modificate. Ioan verifica si aproba in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [5],
+      "sourceRequirement": "N/A — sarcina de design pass aprobata de Ioan in sesiunea din 2026-07-02 (chat), referinta de stil: https://ceida.ro/despre-noi/. Nu provine din documentul de cerinte original.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Cautare + aprobare stock #1 (hero) si #2 (corp)",
+          "description": "Cauta pe Unsplash/Pexels 2 poze cu licenta libera potrivite tematic, propune-le lui Ioan cu nume/sursa/dimensiune, asteapta aprobare explicita inainte de orice descarcare.",
+          "status": "done",
+          "dependencies": [],
+          "details": "DONE 2026-07-02. Ioan a ales personal: hero = Pexels 4344114 (4 profesionisti, sedinta), corp = Pexels 36765717 (3 colegi, tableta). Ambele descarcate in _assets/stock-photos/."
+        },
+        {
+          "id": 2,
+          "title": "Hero: imagine de fundal + overlay + repozitionare titlu",
+          "description": "Seteaza stock #1 aprobat ca background container hero, adauga overlay, repozitioneaza titlul existent (fara subtitlu).",
+          "status": "pending",
+          "dependencies": [1]
+        },
+        {
+          "id": 3,
+          "title": "Hero: buton CTA 'Vezi mai jos ↓'",
+          "description": "Adauga buton cyan care deruleaza spre prima sectiune de continut.",
+          "status": "pending",
+          "dependencies": [2]
+        },
+        {
+          "id": 4,
+          "title": "Imagine corp langa Companii sau Mentori",
+          "description": "Plaseaza stock #2 aprobat langa sectiunea aleasa.",
+          "status": "pending",
+          "dependencies": [1]
+        },
+        {
+          "id": 5,
+          "title": "Restilizare fundaluri sectiuni + accordion + butoane CTA",
+          "description": "Aplica fundaluri alternante pe cele 3 sectiuni, restilizeaza vizual accordion-ul Pentru Mentori si cele 3 butoane CTA (fara modificare URL).",
+          "status": "pending",
+          "dependencies": [2]
+        }
+      ]
+    }
+  ]
+}

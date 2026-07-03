@@ -3,13 +3,14 @@
     "projectName": "Programe & Impact V2",
     "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
     "sourceSection": "Sectiunea PROGRAME SI IMPACT",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "created": "2026-06-27",
-    "updated": "2026-06-27",
-    "totalTasks": 5,
-    "wordpressPageId": null,
+    "updated": "2026-07-02",
+    "totalTasks": 6,
+    "wordpressPageId": 3968,
+    "_note": "wordpressPageId corrected 2026-07-02 (was null) — per project memory (project_ceida-v2-pages.md) the page was actually built and layout-polished at ID 3968 on 2026-06-29. Tasks 1-5 status below is STALE (all show pending) — page is content-complete, pending only Ioan's sign-off. Not corrected in this pass (out of scope) — Task 6 (design pass, added 2026-07-02) is accurate and depends on the real content-done state.",
     "status": {
-      "pending": 5,
+      "pending": 6,
       "in-progress": 0,
       "review": 0,
       "done": 0,
@@ -77,6 +78,55 @@
       "dependencies": [4],
       "sourceRequirement": "Sectiunea completa PROGRAME SI IMPACT din documentul de cerinte — toate textele livrate identic, diacritice corecte, structura vizuala conforma.",
       "subtasks": []
+    },
+    {
+      "id": 6,
+      "title": "Design pass: hero + imagini descriptive (stock nou) + restilizare layout (referinta Despre Noi)",
+      "description": "Rebuild hero-ul (foto full-bleed + overlay + titlu/subtitlu/CTA) si restilizare vizuala a intregii pagini aliniat cu stilul https://ceida.ro/despre-noi/, fara nicio modificare de text.",
+      "details": "Plan complet in programe-impact-v2/plan-design.md. Aprobat de Ioan in sesiunea 2026-07-02 (brainstorming, hero explicit in scope per REGULA 1.0 exceptie aprobata pentru acest task).\n\nATENTIE: singura pagina (impreuna cu parteneriate-v2) unde Media Library NU are nicio poza tematic potrivita (doar demo Avada 'Online School' K-12). Ioan a aprobat explicit sursa noua: stock cu licenta libera (Unsplash/Pexels), 2 poze, FIECARE cu aprobare explicita pe fisier (nume, sursa, dimensiune) inainte de descarcare — nu se descarca nimic fara raspuns explicit 'da' al lui Ioan pe fisierul exact propus.\n\nRezumat:\n1. Hero nou: foto stock noua (tema atelier tehnic/meserii practice — electrica/robotica/tamplarie) + overlay gradient. Titlu 'Programe si Impact' + subtitlu 'Cercurile CEIDA: Dezvoltare prin practica' (text NESCHIMBAT). Buton CTA cyan 'Vezi mai jos ↓' identic pe toate cele 4 pagini.\n2. A doua imagine stock noua (tema complementara, unghi diferit) langa sectiunea 'Ecosistemul Orizontal: Programele Identitare CEIDA'.\n3. Restilizare corp: fundaluri alternante pe sectiunile existente (Hero+Cercuri / 3-card grid categorii / Ecosistemul Orizontal+Educatie non-formala). Cardurile categorie au deja pastile-eticheta mint-green similare Despre Noi — doar polish spacing/shadow/corner-radius. Buton 'Inscrie-te intr-un Cerc' restilizat cyan.\n4. Metoda de lucru: Live Builder Avada, Ioan aplica si salveaza (REGULA 0.4).",
+      "testStrategy": "Hero afiseaza foto stock (aprobata explicit inainte de descarcare) + overlay + titlu+subtitlu (text identic cu cel curent) + buton CTA functional. A doua imagine stock plasata langa Ecosistemul Orizontal. Cardurile categorie polish-uite vizual. Zero cuvinte modificate. Ioan verifica si aproba in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [5],
+      "sourceRequirement": "N/A — sarcina de design pass aprobata de Ioan in sesiunea din 2026-07-02 (chat), referinta de stil: https://ceida.ro/despre-noi/. Nu provine din documentul de cerinte original.",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "Cautare + aprobare stock #1 (hero) si #2 (corp)",
+          "description": "Cauta pe Unsplash/Pexels 2 poze cu licenta libera potrivite tematic, propune-le lui Ioan cu nume/sursa/dimensiune, asteapta aprobare explicita inainte de orice descarcare.",
+          "status": "done",
+          "dependencies": [],
+          "details": "DONE 2026-07-02. Ioan a ales personal: hero = Pexels 9242817 (doi tineri ingineri, placi de circuit), corp = Pexels 9241765 (femeie cu letcon, aceeasi serie). Ambele descarcate in _assets/stock-photos/."
+        },
+        {
+          "id": 2,
+          "title": "Hero: imagine de fundal + overlay + repozitionare titlu/subtitlu",
+          "description": "Seteaza stock #1 aprobat ca background container hero, adauga overlay, repozitioneaza titlul/subtitlul existente.",
+          "status": "pending",
+          "dependencies": [1]
+        },
+        {
+          "id": 3,
+          "title": "Hero: buton CTA 'Vezi mai jos ↓'",
+          "description": "Adauga buton cyan care deruleaza spre prima sectiune de continut.",
+          "status": "pending",
+          "dependencies": [2]
+        },
+        {
+          "id": 4,
+          "title": "Imagine corp langa 'Ecosistemul Orizontal'",
+          "description": "Plaseaza stock #2 aprobat langa aceasta sectiune.",
+          "status": "pending",
+          "dependencies": [1]
+        },
+        {
+          "id": 5,
+          "title": "Restilizare fundaluri sectiuni + polish carduri categorie + buton CTA",
+          "description": "Aplica fundaluri alternante, polish spacing/shadow pe cele 3 carduri categorie, restilizeaza butonul 'Inscrie-te intr-un Cerc'.",
+          "status": "pending",
+          "dependencies": [2]
+        }
+      ]
     }
   ]
 }

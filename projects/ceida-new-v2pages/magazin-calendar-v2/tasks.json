@@ -1,0 +1,75 @@
+{
+  "metadata": {
+    "projectName": "Magazin si Calendar V2",
+    "sourceDocument": "requirements/pagini_v2 - Text Nou Site CEIDA_aprilie 2026.docx",
+    "sourceSection": "PAGINA 6: MAGAZIN si CALENDAR, paragrafele 100-106",
+    "version": "1.0.0",
+    "created": "2026-07-01",
+    "updated": "2026-07-01",
+    "totalTasks": 4,
+    "wordpressPageId": null,
+    "priority_marcaj": "FARA marcaj rosu in document (bold negru) - subproiect din categoria DUPA PRIORITATI conform REGULA 1.5 din CLAUDE.md",
+    "blockers": [
+      "Continutul documentului este foarte scurt (doar 2 teaser-uri scurte + 2 butoane). Pagina pare gandita ca hub minimal cu linkuri catre un magazin online extern si un calendar de evenimente extern. De clarificat cu Ioan: exista deja un magazin online (Woo: Store Coming Soon apare in admin bar - posibil WooCommerce in curs de configurare) si un sistem de calendar? Ce URL-uri primesc cele 2 butoane?",
+      "Nu exista subtitlu/introducere generala a paginii in document, doar cele 2 blocuri scurte. De confirmat cu Ioan daca se doreste un H1 + subtitlu suplimentar sau se pastreaza minimalist exact ca in document."
+    ],
+    "status": {
+      "pending": 4,
+      "in-progress": 0,
+      "review": 0,
+      "done": 0,
+      "blocked": 0,
+      "cancelled": 0
+    }
+  },
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Extragere si pregatire text: Magazinul CEIDA + Calendar Evenimente",
+      "description": "Extrage cele 2 blocuri scurte (Magazin si Calendar) cu textele si butoanele aferente. Corecteaza diacriticele. Nu modifica textul.",
+      "details": "Structura vizuala tinta (pagina foarte scurta, minimalista, conform documentului):\n  - H1: 'Magazin si Calendar' (titlu pagina, de confirmat forma exacta cu Ioan - documentul foloseste eticheta interna 'PAGINA 6: MAGAZIN si CALENDAR')\n  - Bloc 1:\n    * H2: 'Magazinul CEIDA: Sustine o pasiune'\n    * Paragraf: 'Cumperi un produs, sustii un viitor meseriaș.'\n    * Buton: 'Viziteaza Magazinul' [BLOCKER link]\n  - Bloc 2:\n    * H2: 'Calendar Evenimente'\n    * Paragraf: 'Fii la curent cu programul nostru. Aici gasesti orarul Cercurilor, urmatoarele cursuri, hackathoane, intalniri la Hubbin' si evenimentele comunitare de orientare in cariera.'\n    * Buton: 'Vezi Calendarul' [BLOCKER link]\n\nPasi de executie:\n1. Extrage EXACT tot textul din document, ambele blocuri.\n2. Verifica si corecteaza EXCLUSIV diacriticele.\n3. Formateaza ca HTML:\n   <h1>Magazin si Calendar</h1>\n   <h2>Magazinul CEIDA: Sustine o pasiune</h2>\n   <p>Cumperi un produs, sustii un viitor meseriaș.</p>\n   <a class='btn'>Viziteaza Magazinul</a>\n   <h2>Calendar Evenimente</h2>\n   <p>Fii la curent cu programul nostru [...]</p>\n   <a class='btn'>Vezi Calendarul</a>\n4. Salveaza in magazin-calendar-v2/bloc-1-continut.html.\n\nNOTA: continutul este intentionat minimal in document - NU se adauga text suplimentar, chiar daca pagina pare 'goala'. Vezi REGULA 1.5: daca un text lipseste din document, nu exista task pentru el.",
+      "testStrategy": "Fisierul bloc-1-continut.html exista. Ambele blocuri (Magazin, Calendar) cu titluri, paragrafe si butoane prezente, text identic cu documentul, diacritice corecte.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "PAGINA 6: MAGAZIN si CALENDAR. Magazinul CEIDA: Sustine o pasiune. Cumperi un produs, sustii un viitor meseriaș. [BUTON] Viziteaza Magazinul. Calendar Evenimente. Fii la curent cu programul nostru. Aici gasesti orarul Cercurilor, urmatoarele cursuri, hackathoane, intalniri la Hubbin' si evenimentele comunitare de orientare in cariera. [BUTON] Vezi Calendarul.",
+      "subtasks": []
+    },
+    {
+      "id": 2,
+      "title": "Clarificare blockere: URL-uri butoane + confirmare structura minimalista",
+      "description": "Confirma cu Ioan URL-urile pentru cele 2 butoane (Magazin, Calendar) si daca structura minimalista (fara subtitlu suplimentar) e acceptata.",
+      "details": "Intrebari pentru Ioan:\n  1. Exista deja un magazin online functional (WooCommerce, apare 'Woo: Store Coming Soon' in admin bar)? Ce URL primeste butonul 'Viziteaza Magazinul'?\n  2. Exista un sistem/pagina de calendar evenimente? Ce URL primeste butonul 'Vezi Calendarul'?\n  3. Pagina ramane minimalista (doar cele 2 blocuri scurte, fara alt continut), sau se doreste extindere ulterioara cand magazinul/calendarul sunt gata?\nDaca raspunsurile nu sunt disponibile inca: butoanele se aplica fara link functional (placeholder #), marcate clar, si task-ul ramane 'blocked' pana la clarificare - NU se improvizeaza URL-uri.",
+      "testStrategy": "Raspunsurile lui Ioan documentate in acest task (campul details actualizat) SAU task marcat 'blocked' cu motivul exact daca raspunsurile nu sunt inca disponibile.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [],
+      "sourceRequirement": "Blockere identificate: [BUTON] Viziteaza Magazinul si [BUTON] Vezi Calendarul nu au URL specificat in document.",
+      "subtasks": []
+    },
+    {
+      "id": 3,
+      "title": "Aplicare continut in Fusion/Live Builder pe draft-ul clonat",
+      "description": "Dupa ce Ioan cloneaza pagina si furnizeaza link-ul, aplica cele 2 blocuri de continut (Magazin, Calendar) in structura paginii draft.",
+      "details": "PRE-CONDITIE: Ioan a clonat pagina si a furnizat link-ul draft-ului catre Claude.\nPRE-CONDITIE 2: Task 2 (clarificare URL-uri) rezolvat sau asumat ca placeholder de catre Ioan.\n\nStructura pagina (in ordine):\n  1. H1 titlu 'Magazin si Calendar'\n  2. Bloc Magazin (titlu + paragraf + buton)\n  3. Bloc Calendar (titlu + paragraf + buton)\n\nMetoda: Avada Fusion/Live Builder condus prin browser-harness, conform metodei aprobate in acest proiect. NU salvez eu - Ioan verifica si salveaza (vezi feedback_avada-live-builder-never-autosave).\nNU se ating: header, hero/Page Title Bar, footer.",
+      "testStrategy": "Draft-ul WordPress contine ambele blocuri cu text identic cu documentul, butoane cu link-urile clarificate (sau placeholder asumat). Ioan verifica in builder.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [1, 2],
+      "sourceRequirement": "Sectiunea completa PAGINA 6: MAGAZIN si CALENDAR din documentul de cerinte.",
+      "subtasks": []
+    },
+    {
+      "id": 4,
+      "title": "Verificare finala subproiect magazin-calendar-v2",
+      "description": "Verificare completa: continutul din document acoperit, diacritice corecte, pagina draft aprobata de Ioan.",
+      "details": "1. Ruleaza task-master list - confirma zero tasks cu status != done sau cancelled.\n2. Deschide documentul de cerinte, sectiunea PAGINA 6.\n3. Compara cuvant cu cuvant continutul din WP draft cu documentul.\n4. Bifeaza checklist diacritice.\n5. Confirma ca zero text a fost modificat (zero parafrazare, zero adaugiri).\n6. Confirma header/hero/footer neatinse.\n7. Raporteaza per cerinta: 'Cerinta [X] -> Task [ID] -> done | TestStrategy: verificat'.",
+      "testStrategy": "Toate task-urile 1-3 au status done. Continutul din document prezent in pagina draft. Checklist diacritice bifat. Ioan aproba subproiectul in scris.",
+      "status": "pending",
+      "priority": "high",
+      "dependencies": [3],
+      "sourceRequirement": "Sectiunea completa PAGINA 6: MAGAZIN si CALENDAR din documentul de cerinte - continut livrat identic, diacritice corecte, structura conforma.",
+      "subtasks": []
+    }
+  ]
+}

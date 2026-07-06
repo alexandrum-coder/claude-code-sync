@@ -1,0 +1,176 @@
+{
+  "$comment": "Machine-readable routing for the retrieval-by-need skill. Claude reads this to decide which chapters to load for a task. ALWAYS apply SKILL.md core (rules + decision order) without loading anything. Then load ONLY the chapters mapped below. Never bulk-load the chapters/ folder.",
+  "version": "0.1.0",
+  "always_apply": "SKILL.md core: non-negotiable rules + 6-step decision order + language rule",
+  "task_routing": {
+    "new-page":            ["01", "02", "03", "04", "09"],
+    "landing-lead-gen":    ["01", "02", "05", "08", "04"],
+    "rebuild-audit-page":  ["01", "03", "04", "07"],
+    "header-footer-layouts": ["09", "01", "03"],
+    "woocommerce-shop":    ["06", "09", "01", "03"],
+    "global-styling-branding": ["03", "04", "10"],
+    "responsive-mobile":   ["04", "03"],
+    "custom-code-justification": ["07", "01"],
+    "seo-aeo-schema":      ["08", "02"],
+    "translation-bilingual": ["10", "08"]
+  },
+  "routing_notes": {
+    "rebuild-audit-page": "Load 07 only if custom code is actually found or explicitly requested.",
+    "00": "Chapter 00 is the full build rules. The SKILL.md core already summarizes it; load 00 only for deep rule detail."
+  },
+  "chapters": [
+    {
+      "id": "00",
+      "file": "chapters/00-build-rules.md",
+      "title_en": "Build Rules",
+      "title_ro": "Reguli de construcție",
+      "load_when_en": "You need the full, canonical version of the native-first rules and decision order.",
+      "load_when_ro": "Ai nevoie de versiunea completă a regulilor native-first și a ordinii de decizie.",
+      "triggers_en": ["rules", "decision order", "native first", "when custom code", "governance"],
+      "triggers_ro": ["reguli", "ordine de decizie", "native întâi", "cod custom", "guvernanță"],
+      "task_types": ["all"],
+      "always_load": false,
+      "depends_on": []
+    },
+    {
+      "id": "01",
+      "file": "chapters/01-elements-catalog.md",
+      "title_en": "Native Elements Catalog",
+      "title_ro": "Catalog de elemente native",
+      "load_when_en": "You need to pick the right native Avada element for a section (design, layout, form, inline, or WooCommerce elements).",
+      "load_when_ro": "Trebuie să alegi elementul nativ Avada potrivit pentru o secțiune.",
+      "triggers_en": ["element", "which element", "button", "icon box", "content boxes", "slider", "form", "gallery", "pricing table", "faq", "tabs"],
+      "triggers_ro": ["element", "ce element", "buton", "card", "carusel", "formular", "galerie", "tabel de prețuri", "întrebări frecvente", "taburi"],
+      "task_types": ["new-page", "landing-lead-gen", "rebuild-audit-page", "header-footer-layouts", "woocommerce-shop", "custom-code-justification"],
+      "always_load": false,
+      "depends_on": []
+    },
+    {
+      "id": "02",
+      "file": "chapters/02-layout-patterns.md",
+      "title_en": "Page Layout Patterns",
+      "title_ro": "Modele de layout pentru pagini",
+      "load_when_en": "You need a section-by-section blueprint for a page type (B2B, local business, portfolio, SaaS, corporate).",
+      "load_when_ro": "Ai nevoie de o structură pe secțiuni pentru un tip de pagină.",
+      "triggers_en": ["layout", "sections", "page structure", "wireframe", "homepage", "blueprint"],
+      "triggers_ro": ["layout", "secțiuni", "structura paginii", "schiță", "pagina principală"],
+      "task_types": ["new-page", "landing-lead-gen", "seo-aeo-schema"],
+      "always_load": false,
+      "depends_on": ["01"]
+    },
+    {
+      "id": "03",
+      "file": "chapters/03-global-options.md",
+      "title_en": "Global Options",
+      "title_ro": "Opțiuni globale",
+      "load_when_en": "You need site-wide settings: colors, typography, layout width, header/footer strategy, forms, performance, custom CSS panel.",
+      "load_when_ro": "Ai nevoie de setări la nivel de site: culori, tipografie, lățime, header/footer, formulare, performanță.",
+      "triggers_en": ["global options", "colors", "palette", "typography", "fonts", "site width", "performance", "custom css", "branding"],
+      "triggers_ro": ["opțiuni globale", "culori", "paletă", "tipografie", "fonturi", "lățime site", "performanță", "brand"],
+      "task_types": ["new-page", "header-footer-layouts", "woocommerce-shop", "global-styling-branding", "responsive-mobile"],
+      "always_load": false,
+      "depends_on": []
+    },
+    {
+      "id": "04",
+      "file": "chapters/04-responsive-rules.md",
+      "title_en": "Responsive Rules",
+      "title_ro": "Reguli responsive",
+      "load_when_en": "You need to specify desktop/tablet/mobile behavior: breakpoints, responsive option sets, column stacking/order, responsive typography.",
+      "load_when_ro": "Trebuie să specifici comportamentul pe desktop/tabletă/mobil.",
+      "triggers_en": ["responsive", "mobile", "tablet", "breakpoint", "column order", "stacking", "responsive typography"],
+      "triggers_ro": ["responsive", "mobil", "tabletă", "breakpoint", "ordinea coloanelor", "tipografie responsive"],
+      "task_types": ["new-page", "landing-lead-gen", "rebuild-audit-page", "global-styling-branding", "responsive-mobile"],
+      "always_load": false,
+      "depends_on": ["03"]
+    },
+    {
+      "id": "05",
+      "file": "chapters/05-forms-and-leads.md",
+      "title_en": "Forms & Leads",
+      "title_ro": "Formulare și lead-uri",
+      "load_when_en": "The site has a contact form, lead capture, quote request, newsletter opt-in, or spam/GDPR consent needs.",
+      "load_when_ro": "Site-ul are formular de contact, captare lead-uri, cerere de ofertă, abonare newsletter sau consimțământ GDPR.",
+      "triggers_en": ["form", "lead", "contact", "newsletter", "opt-in", "mailchimp", "hubspot", "recaptcha", "gdpr", "consent"],
+      "triggers_ro": ["formular", "lead", "contact", "newsletter", "abonare", "consimțământ", "gdpr", "recaptcha"],
+      "task_types": ["landing-lead-gen"],
+      "always_load": false,
+      "depends_on": ["01"]
+    },
+    {
+      "id": "06",
+      "file": "chapters/06-woocommerce.md",
+      "title_en": "WooCommerce",
+      "title_ro": "WooCommerce / magazin online",
+      "load_when_en": "The project includes an online store: shop/archive, single product, cart, checkout, my account, product filters.",
+      "load_when_ro": "Proiectul include magazin online: shop, produs, coș, checkout, cont, filtre.",
+      "triggers_en": ["woocommerce", "shop", "store", "product", "cart", "checkout", "ecommerce", "my account", "filters"],
+      "triggers_ro": ["woocommerce", "magazin", "produs", "coș", "checkout", "ecommerce", "cont", "filtre"],
+      "task_types": ["woocommerce-shop"],
+      "always_load": false,
+      "depends_on": ["09", "01"]
+    },
+    {
+      "id": "07",
+      "file": "chapters/07-child-theme-hooks.md",
+      "title_en": "Child Theme & Hooks",
+      "title_ro": "Child theme și hooks",
+      "load_when_en": "Custom development is genuinely required: child theme, action/filter hooks, PHP, when native Avada truly can't do it.",
+      "load_when_ro": "Este nevoie real de dezvoltare custom: child theme, hooks, PHP, când Avada nativ chiar nu poate.",
+      "triggers_en": ["child theme", "hook", "filter", "php", "functions.php", "custom development", "override"],
+      "triggers_ro": ["child theme", "hook", "filtru", "php", "dezvoltare custom", "suprascriere"],
+      "task_types": ["rebuild-audit-page", "custom-code-justification"],
+      "always_load": false,
+      "depends_on": ["01"]
+    },
+    {
+      "id": "08",
+      "file": "chapters/08-seo-aeo.md",
+      "title_en": "SEO & AI Visibility",
+      "title_ro": "SEO și vizibilitate în AI",
+      "load_when_en": "You need on-page SEO and AI/answer-engine visibility: keywords, entities, FAQ, schema, internal linking.",
+      "load_when_ro": "Ai nevoie de SEO on-page și vizibilitate în motoarele AI: cuvinte cheie, entități, FAQ, schema, linkuri interne.",
+      "triggers_en": ["seo", "aeo", "geo", "schema", "structured data", "keywords", "meta", "faq", "internal linking", "ai visibility"],
+      "triggers_ro": ["seo", "schema", "date structurate", "cuvinte cheie", "meta", "întrebări frecvente", "linkuri interne", "vizibilitate ai"],
+      "task_types": ["landing-lead-gen", "seo-aeo-schema", "translation-bilingual"],
+      "always_load": false,
+      "depends_on": ["02"]
+    },
+    {
+      "id": "09",
+      "file": "chapters/09-library-layouts-reuse.md",
+      "title_en": "Library, Layouts & Reuse",
+      "title_ro": "Bibliotecă, Layouts și reutilizare",
+      "load_when_en": "You need reusable/global blocks or site-wide templates: Avada Library, Global Elements, Avada Layouts & Layout Sections, conditions.",
+      "load_when_ro": "Ai nevoie de blocuri reutilizabile/globale sau șabloane la nivel de site: Bibliotecă, Global Elements, Avada Layouts.",
+      "triggers_en": ["library", "global element", "layout section", "avada layouts", "header builder", "footer builder", "template", "reuse", "conditions"],
+      "triggers_ro": ["bibliotecă", "element global", "layout section", "avada layouts", "șablon", "reutilizare", "condiții"],
+      "task_types": ["new-page", "header-footer-layouts", "woocommerce-shop"],
+      "always_load": false,
+      "depends_on": ["01", "03"]
+    },
+    {
+      "id": "10",
+      "file": "chapters/10-glossary-bilingual.md",
+      "title_en": "Bilingual Glossary",
+      "title_ro": "Glosar bilingv",
+      "load_when_en": "You need EN<->RO terminology mapping, or rules for handling a bilingual (English UI, Romanian body) build.",
+      "load_when_ro": "Ai nevoie de corespondența termenilor EN<->RO sau de reguli pentru un proiect bilingv.",
+      "triggers_en": ["bilingual", "romanian", "translation", "glossary", "terminology", "language"],
+      "triggers_ro": ["bilingv", "română", "traducere", "glosar", "terminologie", "limbă"],
+      "task_types": ["global-styling-branding", "translation-bilingual"],
+      "always_load": false,
+      "depends_on": []
+    }
+  ],
+  "templates": [
+    {
+      "id": "project-brief",
+      "file": "templates/project-brief.md",
+      "title_en": "Project Brief (fill-in)",
+      "title_ro": "Brief de proiect (de completat)",
+      "load_when_en": "Starting a concrete project — fill this in before /avada-plan.",
+      "load_when_ro": "La începutul unui proiect concret — completează înainte de /avada-plan."
+    }
+  ]
+}

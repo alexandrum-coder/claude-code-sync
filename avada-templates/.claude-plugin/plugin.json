@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin.json",
+  "name": "avada-templates",
+  "version": "0.1.0",
+  "description": "Plan and specify Avada-native WordPress websites. The retrieval-by-need skill loads compact build rules plus a routing index first, then pulls only the documentation chapters a task needs instead of the whole pack. Bilingual EN/RO (English Avada UI terms, Romanian or English body copy). Triggers on: Avada, Avada Builder, WordPress Avada, Avada page, Avada landing page, Avada WooCommerce, pagina Avada, site Avada, landing Avada, magazin Avada.",
+  "author": {
+    "name": "Ioan",
+    "email": "alexandru.ioan.maican@gmail.com"
+  },
+  "keywords": [
+    "avada",
+    "wordpress",
+    "avada-builder",
+    "woocommerce",
+    "website",
+    "landing-page",
+    "bilingual",
+    "romanian",
+    "retrieval-by-need"
+  ]
+}

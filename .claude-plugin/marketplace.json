@@ -5,13 +5,18 @@
   },
   "metadata": {
     "description": "Personal marketplace syncing custom Claude skills across devices.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "obsydia-skills",
       "source": "./obsydia-skills",
       "description": "Personal custom skills collection: design, frontend, image-gen, and workflow skills (brandkit, caveman, impeccable, skill-router, theme-factory, and more)."
+    },
+    {
+      "name": "avada-templates",
+      "source": "./avada-templates",
+      "description": "Avada-native WordPress website planning and build specs. The retrieval-by-need skill loads compact rules plus a routing index first, then pulls only the documentation chapters a task needs (bilingual EN/RO). Commands: /avada-plan, /avada-page, /avada-landing, /avada-rebuild, /avada-header-footer, /avada-woocommerce, /avada-audit."
     }
   ]
 }

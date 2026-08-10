@@ -31,6 +31,19 @@ Interpret **$ARGUMENTS**:
 Confirm the resolved skill folder has a valid `SKILL.md` with `name:` and
 `description:` frontmatter. If not, STOP and report.
 
+## 2.5 Validate the description length and shape
+- Parse the `description` field and measure its length in characters.
+- If it is over **900 characters**, or is a multi-line block (`description: |`
+  spanning many lines of individually-quoted trigger phrases), STOP and warn
+  the user: this app's skill index has silently dropped skills before at this
+  size (the longest description among all skills that actually show up in the
+  available-skills list is ~920 chars). Rewrite it as ONE concise line/sentence
+  (quoted with `"..."` if it contains a colon) before continuing — do not
+  proceed to sync/commit/push with an oversized or multi-line description.
+- This check exists because `minuta-sedinta-obsydia` shipped with a
+  1181-character, 18-line description and was invisible in the skill list for
+  weeks despite valid YAML, correct install, and repeated app restarts.
+
 ## 3. Regenerate the plugin mirror
 - Run `bash "REPO/sync-skills-to-plugin.sh"`.
 - Confirm the new skill shows in the `+ ...` output and no unexpected WARN/skip.

@@ -1,21 +1,6 @@
 ---
 name: minuta-sedinta-obsydia
-description: |
-  Redactează minute de ședință în formatul oficial Obsydia (șablon .docx cu antet
-  și subsol pe fiecare pagină), pornind de la notițe brute sau de la un transcript.
-  Use when the user asks, in Romanian or English, for any of: "minută",
-  "minuta sedintei", "redactează o minută", "redacteaza o minuta", "scrie o minută",
-  "fă-mi o minută", "fa-mi o minuta", "generează o minută ptr ședință în baza acestor
-  notițe", "genereaza o minuta pentru sedinta pe baza notitelor", "am nevoie de o
-  minută", "am nevoie de o minuta de sedinta", "minuta ședinței de azi", "minuta
-  intalnirii", "proces-verbal de ședință", "PV de ședință", "notă de ședință",
-  "raport de ședință", "transformă transcriptul în minută", "fă o minută din
-  transcript", "scoate o minută din înregistrare", "rescrie minuta", "corectează
-  minuta", "curăță minuta", "reformulează minuta", "verifică minuta față de
-  transcript", "compară minuta cu transcriptul", "meeting minutes", "write the
-  minutes", "turn these notes into minutes". Also use whenever raw meeting notes,
-  a meeting transcript, or an existing draft minute is handed over with the intent
-  of producing or fixing an official minute, even if the word "minută" is absent.
+description: "Redactează minute de ședință în formatul oficial Obsydia (șablon .docx cu antet și subsol pe fiecare pagină), din notițe brute sau transcript. Use (RO/EN) when asked for: minută, minuta ședinței, redactează/scrie/fă o minută, proces-verbal de ședință, PV de ședință, notă sau raport de ședință, meeting minutes — also for rescrie/corectează/curăță/verifică minuta față de transcript, sau orice notițe brute, transcript, sau ciornă predate cu scopul de a produce o minută oficială."
 ---
 
 # Minută de ședință, formatul Obsydia

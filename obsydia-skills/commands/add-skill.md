@@ -31,18 +31,12 @@ Interpret **$ARGUMENTS**:
 Confirm the resolved skill folder has a valid `SKILL.md` with `name:` and
 `description:` frontmatter. If not, STOP and report.
 
-## 2.5 Validate the description length and shape
-- Parse the `description` field and measure its length in characters.
-- If it is over **900 characters**, or is a multi-line block (`description: |`
-  spanning many lines of individually-quoted trigger phrases), STOP and warn
-  the user: this app's skill index has silently dropped skills before at this
-  size (the longest description among all skills that actually show up in the
-  available-skills list is ~920 chars). Rewrite it as ONE concise line/sentence
-  (quoted with `"..."` if it contains a colon) before continuing — do not
-  proceed to sync/commit/push with an oversized or multi-line description.
-- This check exists because `minuta-sedinta-obsydia` shipped with a
-  1181-character, 18-line description and was invisible in the skill list for
-  weeks despite valid YAML, correct install, and repeated app restarts.
+## 2.5 Sanity-check the description (style, not a hard blocker)
+Keep `description` to ONE concise line, ideally under ~900 characters, quoted
+with `"..."` if it contains a colon. Long multi-line blocks listing dozens of
+individually-quoted trigger phrases are hard to read and add token cost for
+zero benefit — condense trigger phrases with `/` instead of separate sentences.
+This is a style rule, not the reason a skill fails to load (see step 6.5).
 
 ## 3. Regenerate the plugin mirror
 - Run `bash "REPO/sync-skills-to-plugin.sh"`.
@@ -68,10 +62,54 @@ Confirm the resolved skill folder has a valid `SKILL.md` with `name:` and
 - If update reports no change, reinstall:
   `<claude> plugin install obsydia-skills@obsydia`.
 
+## 6.5 CRITICAL — check whether a REMOTE copy of the plugin overrides the local one
+The desktop app can hold TWO copies of `obsydia-skills`: the local one installed
+from this git repo, and an account-scoped REMOTE one previously uploaded to
+claude.ai. **When both exist, the app silently uses the remote one and ignores
+everything local** — the git repo, `~/.claude/plugins/cache/`, `claude plugin
+update`, and any number of restarts. Nothing surfaces this in the UI.
+
+Verify before reporting success:
+
+```bash
+grep "exists in both remote and local" ~/Library/Logs/Claude/main.log | tail -5
+```
+
+- A line reading `Plugin "obsydia-skills@obsydia" exists in both remote and
+  local. Using remote.` means the local work will NOT take effect.
+- Confirm which version is actually live, and whether it has the new skill:
+
+```bash
+find ~/Library/Application\ Support/Claude/local-agent-mode-sessions \
+  -maxdepth 5 -type d -name "rpm" -exec sh -c \
+  'for p in "$1"/*/; do n=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))[\"name\"])" "$p/.claude-plugin/plugin.json" 2>/dev/null); [ "$n" = "obsydia-skills" ] && { echo "$p"; grep \"version\" "$p/.claude-plugin/plugin.json"; ls "$p/skills" | wc -l; }; done' _ {} \;
+```
+
+If a stale remote copy is live, the ONLY fix is to re-upload the plugin to the
+account (**Customize → Plugins**, upload the zip built in step 6.6) — no CLI
+command updates an account-scoped remote plugin. Alternatively delete the remote
+copy from the account so the local one wins, at the cost of losing cross-device
+sync.
+
+## 6.6 Build an upload-ready zip
+So the remote copy can actually be refreshed:
+
+```bash
+cd REPO/obsydia-skills && zip -r ~/Desktop/obsydia-skills-<version>.zip . -x "*.DS_Store"
+```
+
+The zip must have `.claude-plugin/`, `skills/`, and `commands/` at its ROOT —
+that is the layout the app expects (verified against a downloaded remote copy).
+
 ## 7. Report to the user
 Tell them, concisely:
 - ✅ `<name>` added, synced, committed, and pushed.
+- Whether a remote copy is overriding local (step 6.5) — if yes, say plainly
+  that the skill will NOT appear until they upload the zip in
+  **Customize → Plugins**, and give them the zip path.
 - To see it in the desktop app: **fully restart** it (quit via the system tray,
   not just close the window — a new tab/session will NOT reload the plugin).
 - On OTHER devices: `git pull`, then
-  `claude plugin update obsydia-skills@obsydia`, then full restart.
+  `claude plugin update obsydia-skills@obsydia`, then full restart. If the
+  account-scoped remote copy is in use, other devices pick it up automatically
+  once uploaded — no git pull needed there.

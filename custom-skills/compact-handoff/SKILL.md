@@ -1,6 +1,6 @@
 ---
 name: compact-handoff
-version: 1.1.0
+version: 1.2.0
 description: "End-of-session ritual that makes compaction safe: distil the session into a verified state summary, write a durable HANDOFF file to disk, refresh project memory, emit a copy-paste boot prompt for a cold session, then hand back to the user to run native /compact or /clear (a skill cannot free the context window itself). Use when the user says compact-handoff, /compact-handoff, hand off, handoff, save the session, close the session, wrap up, context is running out, or before an intentional /clear or context reset. Do NOT use for a plain summary request with no session end, and do NOT use it as a substitute for finishing in-flight work."
 ---
 
@@ -36,6 +36,18 @@ Never tell the user the conversation has been compacted. This skill has not
 compacted anything. It has made compaction **safe** — after the handoff exists
 on disk, whatever native compaction drops is recoverable from the file. Step 6
 is where you hand that back to them, explicitly.
+
+### Dead ends — tested, do not retry
+
+| Route | Result |
+|---|---|
+| A `SlashCommand` tool | Not present in the desktop harness at all. Where it does exist (CLI), it runs **only** custom commands from `.claude/commands/`; built-ins (`/compact`, `/clear`, `/config`) are excluded by design. |
+| `CronCreate` with the prompt `/compact` | **Tested 2026-08-11, 16:14 — does not work.** The job fired and auto-deleted on schedule, but the text arrived as an ordinary user prompt and the model turn ran normally. Prompts injected by the scheduler bypass the command parser. Had the harness intercepted it, no model turn would have occurred at all. |
+| Hooks (`PreCompact`, `Stop`) | React to compaction; none can initiate it. |
+
+The conclusion is structural, not a missing feature: `/compact` operates on the
+transcript *before* the model is invoked, so nothing inside a model turn can
+reach it. Do not spend another session looking for a way around this.
 
 ## Hard rules — never violate
 

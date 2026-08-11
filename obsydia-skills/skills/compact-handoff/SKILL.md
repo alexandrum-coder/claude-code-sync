@@ -1,20 +1,41 @@
 ---
 name: compact-handoff
-version: 1.0.0
-description: "End-of-session ritual: compact the conversation into a verified state summary, write a durable HANDOFF file to disk, refresh project memory, and emit a copy-paste boot prompt so a brand-new session resumes with zero loss. Use when the user says compact-handoff, /compact-handoff, hand off, handoff, save the session, close the session, wrap up, context is running out, or before an intentional /clear or context reset. Do NOT use for a plain summary request with no session end, and do NOT use it as a substitute for finishing in-flight work."
+version: 1.1.0
+description: "End-of-session ritual that makes compaction safe: distil the session into a verified state summary, write a durable HANDOFF file to disk, refresh project memory, emit a copy-paste boot prompt for a cold session, then hand back to the user to run native /compact or /clear (a skill cannot free the context window itself). Use when the user says compact-handoff, /compact-handoff, hand off, handoff, save the session, close the session, wrap up, context is running out, or before an intentional /clear or context reset. Do NOT use for a plain summary request with no session end, and do NOT use it as a substitute for finishing in-flight work."
 ---
 
 # Compact + Handoff
 
-Two jobs in one pass, in this order:
+Three beats, and **the order is non-negotiable**:
 
-1. **Compact** — collapse the conversation into the smallest set of facts a
-   successor needs.
-2. **Hand off** — persist those facts to disk and emit a boot prompt that starts
-   the next session cold with nothing lost.
+1. **HANDOFF first** — distil the session into verified state and write it to
+   disk (steps 0–4). Nothing is freed until this file exists.
+2. **BOOT PROMPT second** — emit the copy-paste prompt that restarts a cold
+   session with zero loss (step 5). It is built *from* the handoff, so it cannot
+   be written before it.
+3. **HAND OVER TO NATIVE `/compact` last** — only once both artefacts exist is
+   the transcript expendable (step 6).
 
-Native `/compact` keeps the summary *inside* the session. That summary dies with
-the session. This skill exists because the state has to survive the session.
+Compacting before the handoff is written risks losing exactly the details the
+handoff was supposed to capture. Never reverse these.
+
+## Read this before step 0 — what this skill can and cannot do
+
+A skill runs *inside* the model turn. It cannot free the context window: no tool
+exposed to the model shortens the transcript, and `/compact` and `/clear` are
+harness commands, not skills, so **you cannot invoke them for the user**.
+
+So the division of labour is fixed:
+
+| Job | Who does it | Result |
+|---|---|---|
+| Durable state → disk | this skill | survives the session, survives `/clear` |
+| Freeing the context window | the user, running `/compact` or `/clear` | frees tokens, reports what it saved |
+
+Never tell the user the conversation has been compacted. This skill has not
+compacted anything. It has made compaction **safe** — after the handoff exists
+on disk, whatever native compaction drops is recoverable from the file. Step 6
+is where you hand that back to them, explicitly.
 
 ## Hard rules — never violate
 
@@ -175,6 +196,30 @@ DONE WHEN: <observable finish condition for the first task>
 
 Then a two-line closing summary to the user: handoff path, and the next action.
 
+## Step 6 — Hand compaction back to the user (do not skip)
+
+The handoff now exists on disk, so the transcript is expendable. Close with this
+block, verbatim apart from the filled paths:
+
+```markdown
+**Handoff saved — the context can now be freed safely.**
+Nothing below is lost: everything durable is in `<handoff-path>`.
+
+Pick one:
+
+- **`/compact`** — stays in this session, keeps a summary in context, and
+  reports how many tokens it saved. Use it to keep working right now.
+- **`/clear`, then paste the boot prompt above** — full reset, cleanest
+  context. Use it when this stretch of work is finished.
+
+I cannot run either one for you — they are harness commands, not tools.
+```
+
+Both options are safe *only* after the handoff file has been written and
+re-read. If step 3 failed, say so and tell the user **not** to compact yet.
+
+Output: `✅ Handoff complete — waiting on /compact or /clear from the user.`
+
 ## Done when
 
 - [ ] HANDOFF file exists on disk and was re-read after writing.
@@ -183,6 +228,8 @@ Then a two-line closing summary to the user: handoff path, and the next action.
 - [ ] Traps section lists every failed approach from the session.
 - [ ] Memory index updated, or explicitly stated as unchanged.
 - [ ] Boot prompt printed with zero unfilled placeholders.
+- [ ] Step 6 block printed, offering `/compact` vs `/clear`, with the honest
+      statement that the model cannot run either.
 
 ## Anti-patterns
 
@@ -194,3 +241,5 @@ Then a two-line closing summary to the user: handoff path, and the next action.
 | Leave the next step as "continue the work" | One concrete, startable instruction |
 | Silently drop dead ends because they "didn't work" | Dead ends are the most expensive knowledge in the handoff |
 | Overwrite yesterday's handoff | New dated file, always |
+| Claim the conversation was compacted | Say the handoff is saved, then ask the user to run `/compact` or `/clear` |
+| Invent a "tokens saved" figure | Only native `/compact` can measure that; never estimate it |

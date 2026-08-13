@@ -49,9 +49,16 @@ history back.
 
 **`graphify` has local customizations layered on top of the upstream clone:**
 `SKILL.md`, `.graphify_version`, and `references/` were untracked (not part of
-the upstream repo) at sync time — the `SKILL.md` frontmatter even renames it to
-`graphify-windows` internally. These files are real, intentional local edits
-and are included as plain files in this sync.
+the upstream repo) at sync time. These files are real, intentional local edits
+and are included as plain files in this sync. The `SKILL.md` originally landed
+here as a copy of the upstream Windows variant (`graphify/skill-windows.md`),
+which upstream deliberately names `graphify-windows` in its frontmatter and
+which ships PowerShell install steps — that made the skill name disagree with
+its folder and gave a macOS host Windows instructions. It has since been
+replaced with a copy of the posix/Claude variant (`graphify/skill.md`), whose
+frontmatter name is `graphify`, matching the folder. The generated artifacts
+under `graphify/` and `tools/skillgen/expected/` are upstream build output and
+are left untouched, so `python -m tools.skillgen --check` still passes.
 
 **`caveman` overlaps with a built-in skill.** Claude Code ships an
 `anthropic-skills:caveman` skill via its own marketplace plugin. This

@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Personal marketplace syncing custom Claude skills across devices.",
-    "version": "1.1.0"
+    "version": "1.2.0"
   },
   "plugins": [
     {

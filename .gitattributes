@@ -1,0 +1,11 @@
+# core.autocrlf=true is set on this machine, and without these rules a fresh
+# clone would check out the shell scripts with CRLF endings. bash then fails on
+# the trailing \r of every line ("$'\r': command not found"), which looks like a
+# corrupt script rather than a line-ending problem. Keep .sh as LF everywhere.
+*.sh text eol=lf
+
+# Skill frontmatter is parsed as YAML; keep it stable across platforms too.
+*.md text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

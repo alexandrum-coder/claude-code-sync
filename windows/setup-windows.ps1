@@ -59,13 +59,23 @@ if ($modes.Count -ne 1) { Write-Host "Choose exactly one mode: -Backup, -Pilot, 
 
 # ---------------------------------------------------------------- account-copy check
 function Check-Override {
-  $logs = @((Join-Path $env:APPDATA 'Claude\logs\main.log'))
-  $logs += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue |
-    ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\logs\main.log' })
-  # Several app installs can leave logs behind (classic and Microsoft Store): read the newest.
-  $log = $logs | Where-Object { Test-Path -LiteralPath $_ } |
-    Sort-Object { (Get-Item -LiteralPath $_).LastWriteTime } -Descending | Select-Object -First 1
+  # The log location differs per install type and app version (classic, Microsoft
+  # Store, older leftovers), so search every Claude folder and read the newest main*.log.
+  $roots = @()
+  $roots += @(Get-ChildItem $env:APPDATA -Directory -Filter 'Claude*' -ErrorAction SilentlyContinue)
+  $roots += @(Get-ChildItem $env:LOCALAPPDATA -Directory -Filter 'Claude*' -ErrorAction SilentlyContinue)
+  $roots += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue)
+  $cands = @($roots | ForEach-Object { Get-ChildItem $_.FullName -Recurse -File -Filter 'main*.log' -ErrorAction SilentlyContinue } |
+    Sort-Object LastWriteTime -Descending)
+  Write-Host "  newest app logs found:"
+  $cands | Select-Object -First 3 | ForEach-Object { Write-Host ("    " + $_.LastWriteTime + "  " + $_.FullName) }
+  $log = if ($cands.Count -gt 0) { $cands[0].FullName } else { $null }
   if (-not $log) { Write-Host "  (app log not found; cannot check)"; return $true }
+  if ($cands[0].LastWriteTime -lt (Get-Date).AddHours(-12)) {
+    Write-Host "  CANNOT CHECK: the newest app log is older than 12 hours, so it does not describe the current app." -ForegroundColor Yellow
+    Write-Host "  Send this output to the Mac (the list above shows where the logs are)." -ForegroundColor Yellow
+    return $true
+  }
   Write-Host ("  log: " + $log + "  (last written " + (Get-Item -LiteralPath $log).LastWriteTime + ")")
   $lines = @(Get-Content -LiteralPath $log -Encoding UTF8)
   $last = -1

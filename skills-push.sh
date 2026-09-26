@@ -67,9 +67,11 @@ check_override() {
   for f in "$HOME/Library/Logs/Claude/main.log" \
            "${APPDATA:-/nonexistent}/Claude/logs/main.log" \
            "${LOCALAPPDATA:-/nonexistent}"/Packages/Claude_*/LocalCache/Roaming/Claude/logs/main.log; do
-    [ -f "$f" ] && { log="$f"; break; }
+    # several app installs can leave logs behind: keep the newest
+    [ -f "$f" ] && { [ -z "$log" ] || [ "$f" -nt "$log" ]; } && log="$f"
   done
   if [ -z "$log" ]; then echo "    (app log not found; cannot check for an account copy)"; return 0; fi
+  echo "    log: $log"
   "$PY" - "$log" <<'PYEOF'
 import sys
 lines = open(sys.argv[1], encoding="utf-8", errors="replace").read().splitlines()

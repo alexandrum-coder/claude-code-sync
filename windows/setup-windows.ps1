@@ -62,8 +62,11 @@ function Check-Override {
   $logs = @((Join-Path $env:APPDATA 'Claude\logs\main.log'))
   $logs += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue |
     ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\logs\main.log' })
-  $log = $logs | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+  # Several app installs can leave logs behind (classic and Microsoft Store): read the newest.
+  $log = $logs | Where-Object { Test-Path -LiteralPath $_ } |
+    Sort-Object { (Get-Item -LiteralPath $_).LastWriteTime } -Descending | Select-Object -First 1
   if (-not $log) { Write-Host "  (app log not found; cannot check)"; return $true }
+  Write-Host ("  log: " + $log + "  (last written " + (Get-Item -LiteralPath $log).LastWriteTime + ")")
   $lines = @(Get-Content -LiteralPath $log -Encoding UTF8)
   $last = -1
   for ($i = $lines.Count - 1; $i -ge 0; $i--) { if ($lines[$i] -like '*plugin(s) to SDK*') { $last = $i; break } }

@@ -61,3 +61,7 @@ If a reveal/animation system includes a "ship visible even if the IntersectionOb
 
 ### The verification standard for any scroll/hover/transition motion
 A snap and a smooth transition produce an identical settled-state screenshot. Never declare animation work complete based on a screenshot or a "looks right" pass alone. Verify the actual interpolation: read the correct `getComputedStyle` property before the state change and after, or add timestamped console logging and inspect the real timeline of when states flip relative to scroll/interaction. If the evidence only ever shows the final state, that is not verification — go get evidence of the transition itself.
+
+## Romanian spelling — absolute rule
+
+Write **sunt**. Never write the â-variant ("sânt", "sântem", "sânteți"). This applies everywhere without exception: chat replies, files on disk, generated documents, code comments, commit messages, any project, any session. Before emitting Romanian text, check for the sequence "sânt" and replace it with "sunt". Do not open a discussion about which form is academically correct — the user has decided.

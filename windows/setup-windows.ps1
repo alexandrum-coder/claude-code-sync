@@ -221,6 +221,18 @@ if ($All) {
   foreach ($p in $base.plugins) { Ensure-Plugin $p }
   Write-Host "`nCLAUDE.md"
   Sync-ClaudeMd $null
+  # The account copy of obsydia-skills (which wins in the desktop app) carries no
+  # agents/, so agents are placed as loose files, the same way they sit on the Mac.
+  Write-Host "`nAGENTS"
+  $ad = Join-Path $CL 'agents'
+  foreach ($a in (Get-ChildItem (Join-Path $REPO 'obsydia-skills\agents') -Filter *.md -ErrorAction SilentlyContinue)) {
+    $to = Join-Path $ad $a.Name
+    if (Test-Path -LiteralPath $to) { Skip "agent $($a.Name) (already present)"; continue }
+    if ($DryRun) { Write-Host "  DRY  copy $($a.FullName) -> $to"; continue }
+    New-Item -ItemType Directory -Path $ad -Force | Out-Null
+    Copy-Item -LiteralPath $a.FullName -Destination $to
+    Ok "agent $($a.Name)"
+  }
   Write-Host "`nMCP"
   Ensure-Mcp
 }

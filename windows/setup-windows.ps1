@@ -6,6 +6,7 @@
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -Pilot
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -All
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -Update
+#   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -FixPermissions
 # Add -DryRun to any mode to print what would run, without running it.
 #
 #   -Backup  copies the Claude settings files to %USERPROFILE%\claude-backup\<time>\
@@ -16,6 +17,9 @@
 #            MCP servers task-master-ai, composio, notebooklm.
 #   -Update  later, after changes on the Mac: git pull, refresh marketplaces and
 #            plugins, refresh CLAUDE.md.
+#   -FixPermissions  removes the permissions.ask list from the user settings.json
+#            (ask rules prompt even in Bypass mode; the Mac has none). Everything
+#            else in the file is kept. The old file is in the backup.
 #
 # Safety:
 #   * -Pilot / -All / -Update refuse to run without a verified backup.
@@ -29,7 +33,7 @@
 # After -Pilot, -All or -Update: quit the Claude app from the system tray and relaunch.
 # ============================================================================
 param(
-  [switch]$Backup, [switch]$Pilot, [switch]$All, [switch]$Update,
+  [switch]$Backup, [switch]$Pilot, [switch]$All, [switch]$Update, [switch]$FixPermissions,
   [switch]$DryRun, [switch]$ReplaceClaudeMd
 )
 $ErrorActionPreference = 'Stop'
@@ -46,13 +50,17 @@ function Stop-Plan($s) { Write-Host ""; Write-Host "STOP: $s" -ForegroundColor R
 function Load($p) { if (Test-Path -LiteralPath $p) { return (Get-Content -LiteralPath $p -Raw -Encoding UTF8 | ConvertFrom-Json) } return $null }
 function Names($o) { if ($null -eq $o) { return @() } return @($o.PSObject.Properties.Name) }
 
-$modes = @($Backup, $Pilot, $All, $Update) | Where-Object { $_ }
-if ($modes.Count -ne 1) { Write-Host "Choose exactly one mode: -Backup, -Pilot, -All or -Update"; exit 1 }
+$modes = @(@($Backup, $Pilot, $All, $Update, $FixPermissions) | Where-Object { $_ })
+if ($modes.Count -ne 1) { Write-Host "Choose exactly one mode: -Backup, -Pilot, -All, -Update or -FixPermissions"; exit 1 }
 
 # ---------------------------------------------------------------- claude.exe
 function Find-Claude {
-  $root = Join-Path $env:APPDATA 'Claude\claude-code'
-  if (Test-Path $root) {
+  # Bundled copy: classic install, then Microsoft Store (MSIX) install, then PATH.
+  $roots = @((Join-Path $env:APPDATA 'Claude\claude-code'))
+  $roots += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue |
+    ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\claude-code' })
+  foreach ($root in $roots) {
+    if (-not (Test-Path $root)) { continue }
     $dir = Get-ChildItem $root -Directory | Where-Object { Test-Path (Join-Path $_.FullName 'claude.exe') } |
       Sort-Object { try { [version]$_.Name } catch { [version]'0.0' } } -Descending | Select-Object -First 1
     if ($dir) { return (Join-Path $dir.FullName 'claude.exe') }
@@ -115,9 +123,18 @@ if (-not $base) { Stop-Plan "windows\mac-baseline.json missing or unreadable" }
 function Known-Marketplaces { $k = Load (Join-Path $CL 'plugins\known_marketplaces.json'); if ($k) { return $k } return (New-Object PSObject) }
 function Installed-Plugins  { $i = Load (Join-Path $CL 'plugins\installed_plugins.json'); if ($i -and $i.plugins) { return @(Names $i.plugins) } return @(Names $i) }
 
-function Norm($s) { return ([string]$s).Trim().TrimEnd('/').ToLower() -replace '\.git$', '' -replace '\\', '/' }
+# 'owner/repo', 'https://github.com/owner/repo.git' and 'git@github.com:owner/repo.git'
+# all name the same repository.
+function Norm($s) {
+  $n = ([string]$s).Trim().TrimEnd('/').ToLower() -replace '\\', '/'
+  $n = $n -replace '^https://github\.com/', '' -replace '^git@github\.com:', ''
+  return ($n -replace '\.git$', '')
+}
+# This machine has no SSH key for GitHub; clones go over HTTPS (Git Credential Manager).
+function To-Https($s) { return ([string]$s -replace '^git@github\.com:', 'https://github.com/') }
 
 function Ensure-Marketplace([string]$name, [string]$source) {
+  $source = To-Https $source
   $km = Known-Marketplaces
   if ((Names $km) -contains $name) {
     $s = $km.$name.source
@@ -133,8 +150,20 @@ function Ensure-Marketplace([string]$name, [string]$source) {
   if (-not $DryRun) { Ok "marketplace $name" }
 }
 
+function Is-Enabled([string]$id) {
+  $st = Load (Join-Path $CL 'settings.json')
+  if ($st -and $st.enabledPlugins -and ((Names $st.enabledPlugins) -contains $id)) { return [bool]$st.enabledPlugins.$id }
+  return $false
+}
+
 function Ensure-Plugin([string]$id) {
-  if ((Installed-Plugins) -contains $id) { Skip "plugin $id (already installed)"; return }
+  if ((Installed-Plugins) -contains $id) {
+    if (Is-Enabled $id) { Skip "plugin $id (already installed and enabled)"; return }
+    Write-Host "  ON   plugin $id (installed, not enabled)"
+    Run-Claude @('plugin', 'enable', $id) "enable $id"
+    if (-not $DryRun) { Ok "plugin $id enabled" }
+    return
+  }
   Write-Host "  ADD  plugin $id"
   Run-Claude @('plugin', 'install', $id) "plugin $id"
   if (-not $DryRun) { Ok "plugin $id" }
@@ -206,7 +235,34 @@ function Ensure-Mcp {
   }
 }
 
+# ---------------------------------------------------------------- permissions
+function Fix-Permissions {
+  $p = Join-Path $CL 'settings.json'
+  $d = Load $p
+  if (-not $d) { Stop-Plan "settings.json missing or unreadable: $p" }
+  if (-not $d.permissions -or -not ((Names $d.permissions) -contains 'ask')) { Skip "no permissions.ask in settings.json"; return }
+  $rules = @($d.permissions.ask)
+  Write-Host "  Removing $($rules.Count) ask rule(s):"
+  $rules | ForEach-Object { Write-Host "    - $_" }
+  $keysBefore = @(Names $d) -join ','
+  if ($DryRun) { Write-Host "  DRY  write $p without permissions.ask"; return }
+  $d.permissions.PSObject.Properties.Remove('ask')
+  $json = $d | ConvertTo-Json -Depth 50
+  # UTF-8 without BOM: a BOM breaks JSON parsing in Claude Code.
+  [System.IO.File]::WriteAllText($p, $json, (New-Object System.Text.UTF8Encoding($false)))
+  $v = Load $p
+  if (-not $v) { Stop-Plan "settings.json unreadable after write. Restore it from the backup: $($last.FullName)" }
+  if ($v.permissions -and ((Names $v.permissions) -contains 'ask')) { Stop-Plan "permissions.ask still present after write" }
+  if ((@(Names $v) -join ',') -ne $keysBefore) { Stop-Plan "top-level keys changed after write. Restore it from the backup: $($last.FullName)" }
+  Ok "permissions.ask removed; other settings unchanged (keys: $keysBefore)"
+}
+
 # ---------------------------------------------------------------- modes
+if ($FixPermissions) {
+  Write-Host "`nPERMISSIONS"
+  Fix-Permissions
+}
+
 if ($Pilot) {
   Write-Host "`nPILOT: caveman"
   Ensure-Marketplace 'caveman' (Source-Of 'caveman')

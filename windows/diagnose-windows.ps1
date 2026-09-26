@@ -31,13 +31,16 @@ W ("date: " + (Get-Date -Format 'yyyy-MM-dd HH:mm'))
 W ("user profile: $U")
 
 Sec 'VERSION'
-$ccRoot = Join-Path $env:APPDATA 'Claude\claude-code'
-if (Test-Path $ccRoot) {
-  Get-ChildItem $ccRoot -Directory | ForEach-Object {
-    $exe = Join-Path $_.FullName 'claude.exe'
-    if (Test-Path $exe) { W ("bundled: " + $_.Name + " | " + (& $exe --version 2>&1)) }
-  }
-} else { W "bundled: MISSING ($ccRoot)" }
+$ccRoots = @((Join-Path $env:APPDATA 'Claude\claude-code'))
+$ccRoots += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue | ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\claude-code' })
+foreach ($ccRoot in $ccRoots) {
+  if (Test-Path $ccRoot) {
+    Get-ChildItem $ccRoot -Directory | ForEach-Object {
+      $exe = Join-Path $_.FullName 'claude.exe'
+      if (Test-Path $exe) { W ("bundled: " + $_.FullName + " | " + (& $exe --version 2>&1)) }
+    }
+  } else { W "bundled: MISSING ($ccRoot)" }
+}
 $onPath = Get-Command claude -ErrorAction SilentlyContinue
 if ($onPath) { W ("claude on PATH: " + $onPath.Source + " | " + (& claude --version 2>&1)) } else { W 'claude on PATH: MISSING' }
 
@@ -190,7 +193,7 @@ W ("CLAUDE_CODE_* env names: " + ((Get-ChildItem env: | Where-Object Name -like 
 Sec 'GITHUB_SSH'
 $ssh = Get-Command ssh -ErrorAction SilentlyContinue
 if ($ssh) {
-  $r = (& ssh -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=accept-new -T git@github.com 2>&1) -join ' '
+  $r = (& ssh -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1) -join ' '
   W (Red $r)
 } else { W 'ssh MISSING' }
 

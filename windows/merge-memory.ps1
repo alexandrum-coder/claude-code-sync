@@ -56,7 +56,8 @@ if ($DryRun) {
 }
 
 # 1. backup
-$bk = Join-Path $env:USERPROFILE ("claude-backup\memory-D--Claude-Projects---Obsydia-" + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+$slug = Split-Path (Split-Path $Target -Parent) -Leaf   # the project folder name, e.g. D--Claude-CoWork-nou-rna-ro
+$bk = Join-Path $env:USERPROFILE ("claude-backup\memory-" + $slug + "-" + (Get-Date -Format 'yyyyMMdd-HHmmss'))
 New-Item -ItemType Directory -Path $bk -Force | Out-Null
 $ok = 0; $all = @(Get-ChildItem -LiteralPath $Target -File)
 foreach ($f in $all) {

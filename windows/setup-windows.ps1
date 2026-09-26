@@ -46,6 +46,9 @@ $CL    = Join-Path $U '.claude'
 $REPO  = Split-Path -Parent $PSScriptRoot
 $BROOT = Join-Path $U 'claude-backup'
 $notes = New-Object System.Collections.Generic.List[string]
+# Marketplaces (and their plugins) not wanted on this laptop: 'frame' belongs to
+# another company and is not part of the Obsydia work (decided 2026-09-26).
+$EXCLUDE = @('frame')
 
 function Ok($s)   { Write-Host "  OK   $s" -ForegroundColor Green }
 function Skip($s) { Write-Host "  SKIP $s" -ForegroundColor DarkGray }
@@ -189,6 +192,7 @@ function Norm($s) {
 function To-Https($s) { return ([string]$s -replace '^git@github\.com:', 'https://github.com/') }
 
 function Ensure-Marketplace([string]$name, [string]$source) {
+  if ($EXCLUDE -contains $name) { Skip "marketplace $name (excluded on this laptop)"; return }
   $source = To-Https $source
   $km = Known-Marketplaces
   if ((Names $km) -contains $name) {
@@ -212,6 +216,7 @@ function Is-Enabled([string]$id) {
 }
 
 function Ensure-Plugin([string]$id) {
+  if ($EXCLUDE -contains ($id -split '@')[-1]) { Skip "plugin $id (excluded on this laptop)"; return }
   if ((Installed-Plugins) -contains $id) {
     if (Is-Enabled $id) { Skip "plugin $id (already installed and enabled)"; return }
     Write-Host "  ON   plugin $id (installed, not enabled)"
@@ -360,7 +365,10 @@ if ($Update) {
   Ensure-Marketplace 'obsydia' $REPO
   foreach ($n in (Names (Known-Marketplaces))) { Run-Claude @('plugin', 'marketplace', 'update', $n) "marketplace update $n" }
   Write-Host "`nPLUGINS"
-  foreach ($p in $base.plugins) { Ensure-Plugin $p; Run-Claude @('plugin', 'update', $p) "plugin update $p" }
+  foreach ($p in $base.plugins) {
+    if ($EXCLUDE -contains ($p -split '@')[-1]) { Skip "plugin $p (excluded on this laptop)"; continue }
+    Ensure-Plugin $p; Run-Claude @('plugin', 'update', $p) "plugin update $p"
+  }
   Write-Host "`nCLAUDE.md"
   Sync-ClaudeMd $prev
   Write-Host "`nACCOUNT COPY CHECK (last app start, before this update)"

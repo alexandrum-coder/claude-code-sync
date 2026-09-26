@@ -162,7 +162,17 @@ if (-not $base) { Stop-Plan "windows\mac-baseline.json missing or unreadable" }
 
 # ---------------------------------------------------------------- marketplaces / plugins
 function Known-Marketplaces { $k = Load (Join-Path $CL 'plugins\known_marketplaces.json'); if ($k) { return $k } return (New-Object PSObject) }
-function Installed-Plugins  { $i = Load (Join-Path $CL 'plugins\installed_plugins.json'); if ($i -and $i.plugins) { return @(Names $i.plugins) } return @(Names $i) }
+# Only user-scope installs count: on the Mac every plugin is user scope, while a
+# project-scope install (seen on Windows) exists only inside one folder.
+function Installed-Plugins {
+  $i = Load (Join-Path $CL 'plugins\installed_plugins.json')
+  $pl = if ($i -and $i.plugins) { $i.plugins } else { $i }
+  $ids = @()
+  foreach ($x in @($pl.PSObject.Properties)) {
+    if (@($x.Value) | Where-Object { $_.scope -eq 'user' }) { $ids += $x.Name }
+  }
+  return $ids
+}
 
 # 'owner/repo', 'https://github.com/owner/repo.git' and 'git@github.com:owner/repo.git'
 # all name the same repository.

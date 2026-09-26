@@ -7,6 +7,7 @@
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -All
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -Update
 #   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -FixPermissions
+#   powershell -ExecutionPolicy Bypass -File .\windows\setup-windows.ps1 -Check
 # Add -DryRun to any mode to print what would run, without running it.
 #
 #   -Backup  copies the Claude settings files to %USERPROFILE%\claude-backup\<time>\
@@ -17,6 +18,9 @@
 #            MCP servers task-master-ai, composio, notebooklm.
 #   -Update  later, after changes on the Mac: git pull, refresh marketplaces and
 #            plugins, refresh CLAUDE.md.
+#   -Check   read-only: did an ACCOUNT copy of obsydia-skills override the local
+#            one at the last app start? (obsydia-skills is delivered locally only,
+#            from this repo; an account copy with the same name always wins.)
 #   -FixPermissions  removes the permissions.ask list from the user settings.json
 #            (ask rules prompt even in Bypass mode; the Mac has none). Everything
 #            else in the file is kept. The old file is in the backup.
@@ -33,7 +37,7 @@
 # After -Pilot, -All or -Update: quit the Claude app from the system tray and relaunch.
 # ============================================================================
 param(
-  [switch]$Backup, [switch]$Pilot, [switch]$All, [switch]$Update, [switch]$FixPermissions,
+  [switch]$Backup, [switch]$Pilot, [switch]$All, [switch]$Update, [switch]$FixPermissions, [switch]$Check,
   [switch]$DryRun, [switch]$ReplaceClaudeMd
 )
 $ErrorActionPreference = 'Stop'
@@ -50,8 +54,32 @@ function Stop-Plan($s) { Write-Host ""; Write-Host "STOP: $s" -ForegroundColor R
 function Load($p) { if (Test-Path -LiteralPath $p) { return (Get-Content -LiteralPath $p -Raw -Encoding UTF8 | ConvertFrom-Json) } return $null }
 function Names($o) { if ($null -eq $o) { return @() } return @($o.PSObject.Properties.Name) }
 
-$modes = @(@($Backup, $Pilot, $All, $Update, $FixPermissions) | Where-Object { $_ })
-if ($modes.Count -ne 1) { Write-Host "Choose exactly one mode: -Backup, -Pilot, -All, -Update or -FixPermissions"; exit 1 }
+$modes = @(@($Backup, $Pilot, $All, $Update, $FixPermissions, $Check) | Where-Object { $_ })
+if ($modes.Count -ne 1) { Write-Host "Choose exactly one mode: -Backup, -Pilot, -All, -Update, -FixPermissions or -Check"; exit 1 }
+
+# ---------------------------------------------------------------- account-copy check
+function Check-Override {
+  $logs = @((Join-Path $env:APPDATA 'Claude\logs\main.log'))
+  $logs += @(Get-ChildItem (Join-Path $env:LOCALAPPDATA 'Packages') -Directory -Filter 'Claude_*' -ErrorAction SilentlyContinue |
+    ForEach-Object { Join-Path $_.FullName 'LocalCache\Roaming\Claude\logs\main.log' })
+  $log = $logs | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1
+  if (-not $log) { Write-Host "  (app log not found; cannot check)"; return $true }
+  $lines = @(Get-Content -LiteralPath $log -Encoding UTF8)
+  $last = -1
+  for ($i = $lines.Count - 1; $i -ge 0; $i--) { if ($lines[$i] -like '*plugin(s) to SDK*') { $last = $i; break } }
+  if ($last -lt 0) { Write-Host "  (no session start in the app log yet)"; return $true }
+  $from = [Math]::Max(0, $last - 80)
+  $hit = $lines[$from..$last] | Where-Object { $_ -like '*"obsydia-skills@obsydia" exists in both remote and local*' }
+  $when = $lines[$last].Substring(0, [Math]::Min(19, $lines[$last].Length))
+  if ($hit) {
+    Write-Host "  WARN at the last app start ($when) an ACCOUNT copy of obsydia-skills overrode the local one." -ForegroundColor Yellow
+    Write-Host "       Remove every obsydia-skills entry in Customize -> Plugins, quit the app fully, reopen, run -Check again." -ForegroundColor Yellow
+    return $false
+  }
+  Write-Host "  OK   at the last app start ($when) no account copy overrode the local obsydia-skills" -ForegroundColor Green
+  return $true
+}
+if ($Check) { Write-Host "CHECK"; if (Check-Override) { exit 0 } else { exit 3 } }
 
 # ---------------------------------------------------------------- claude.exe
 function Find-Claude {
@@ -308,8 +336,12 @@ if ($Update) {
   foreach ($p in $base.plugins) { Ensure-Plugin $p; Run-Claude @('plugin', 'update', $p) "plugin update $p" }
   Write-Host "`nCLAUDE.md"
   Sync-ClaudeMd $prev
+  Write-Host "`nACCOUNT COPY CHECK (last app start, before this update)"
+  if (-not (Check-Override)) { $notes.Add("an account copy of obsydia-skills overrode the local one at the last app start") }
 }
 
 Write-Host ""
 if ($notes.Count -gt 0) { Write-Host "Notes:" -ForegroundColor Yellow; $notes | ForEach-Object { Write-Host "  - $_" } }
 Write-Host "Done. Quit the Claude app from the system tray and relaunch it." -ForegroundColor Green
+if ($All) { Write-Host "Next: run -Update once, so plugins that were already installed (e.g. obsydia-skills 1.1.2) move to the current version." }
+Write-Host "After the relaunch, confirm with: -Check"

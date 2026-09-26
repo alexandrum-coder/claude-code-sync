@@ -1,5 +1,18 @@
 # Skills sync — how personal skills reach each surface
 
+> **Decision 2026-09-26 — one channel only: local.** `obsydia-skills` reaches the
+> desktop app ONLY as the plugin installed locally from this repo, on every
+> machine. It is **not** uploaded to the claude.ai account any more, and no
+> account marketplace is linked to this repo. Reason: when an account copy and a
+> local copy share the name, the app always uses the account copy and says so
+> only in its log (`exists in both remote and local. Using remote.`); account
+> copies never follow `git`, and a missed or wrong upload kept serving stale
+> versions on both machines. `.plugin-channel` holds `local`; `skills-push.sh`
+> skips the account gate and the zip, and ends with an override check.
+> Check any time: `bash skills-push.sh --check` (Mac) or
+> `setup-windows.ps1 -Check` (Windows). Trade-off accepted: the Cowork tab,
+> which reads account plugins only, does not get these skills.
+
 This repo delivers custom skills to **two different Claude surfaces**, which use
 two different discovery mechanisms. Adding a skill means making sure it reaches
 both.

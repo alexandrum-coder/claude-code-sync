@@ -38,6 +38,10 @@
 # reconciliation of a stale account copy):
 #
 #   bash skills-push.sh --build-zip
+#
+# With .plugin-channel = "local" (the current setup, since 2026-09-26) steps 0
+# and 6 change: no account gate and no zip; step 6 checks the app log instead.
+#   bash skills-push.sh --check     # did an account copy override the local one?
 # ============================================================================
 
 set -euo pipefail
@@ -47,6 +51,44 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PLUGIN="$REPO/obsydia-skills"
 MANIFEST="$PLUGIN/.claude-plugin/plugin.json"
 ACCOUNT_STATE="$REPO/.account-version"
+
+# --- delivery channel (decided 2026-09-26) ----------------------------------
+# "local": obsydia-skills reaches the desktop app ONLY as the locally installed
+# plugin from this repo. No account copy, no zip upload: an account copy with
+# the same name silently overrides the local one ("exists in both remote and
+# local. Using remote." in the app log), which is what kept serving stale
+# versions. Any other value (or no file) restores the old account-upload flow.
+CHANNEL="$(tr -d '[:space:]' < "$REPO/.plugin-channel" 2>/dev/null || true)"
+
+# Scans the desktop app log for the last session start and reports whether an
+# account copy of obsydia-skills overrode the local one there.
+check_override() {
+  local log=""
+  for f in "$HOME/Library/Logs/Claude/main.log" \
+           "${APPDATA:-/nonexistent}/Claude/logs/main.log" \
+           "${LOCALAPPDATA:-/nonexistent}"/Packages/Claude_*/LocalCache/Roaming/Claude/logs/main.log; do
+    [ -f "$f" ] && { log="$f"; break; }
+  done
+  if [ -z "$log" ]; then echo "    (app log not found; cannot check for an account copy)"; return 0; fi
+  "$PY" - "$log" <<'PYEOF'
+import sys
+lines = open(sys.argv[1], encoding="utf-8", errors="replace").read().splitlines()
+starts = [i for i, l in enumerate(lines) if "plugin(s) to SDK" in l]
+if not starts:
+    print("    (no session start in the app log yet)"); sys.exit(0)
+last = starts[-1]
+block = lines[max(0, last - 80):last + 1]
+hit = [l for l in block if '"obsydia-skills@obsydia" exists in both remote and local' in l]
+when = lines[last][:19]
+if hit:
+    print(f"    WARN - at the last app start ({when}) an ACCOUNT copy of obsydia-skills")
+    print("           overrode the local one. Remove every obsydia-skills entry from")
+    print("           Customize -> Plugins (and any claude-code-sync marketplace linked")
+    print("           to the account), then quit the app fully and reopen.")
+    sys.exit(3)
+print(f"    OK - at the last app start ({when}) no account copy overrode the local plugin")
+PYEOF
+}
 
 # --- a Python that actually runs (python3 is a Store stub on Windows) -------
 PY=""
@@ -65,6 +107,11 @@ done
 [ -n "$DESKTOP" ] || DESKTOP="$REPO"
 
 # --- mode: confirm an upload happened --------------------------------------
+if [ "${1:-}" = "--check" ]; then
+  echo "==> Checking the last desktop-app start for an account copy of obsydia-skills"
+  check_override; exit $?
+fi
+
 if [ "${1:-}" = "--mark-uploaded" ]; then
   MV="${2:-}"
   if ! printf '%s' "$MV" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
@@ -129,7 +176,9 @@ else
 
 # --- 0. account gate -------------------------------------------------------
 echo "==> 0/6  Checking the Cowork account copy"
-if [ "$ACCOUNT_V" = "$CURRENT" ]; then
+if [ "$CHANNEL" = "local" ]; then
+  echo "    SKIP - channel is 'local' (.plugin-channel); no account copy is used"
+elif [ "$ACCOUNT_V" = "$CURRENT" ]; then
   echo "    OK - account and local plugin are both at $CURRENT"
 elif [ "$ACCEPT_DRIFT" -eq 1 ]; then
   echo "    WARN - account at '$ACCOUNT_V', local at '$CURRENT'; continuing (--accept-drift)"
@@ -227,7 +276,19 @@ echo "    $(git -C "$REPO" log --oneline -1)"
 
 # --- 5. Claude Code --------------------------------------------------------
 echo "==> 5/6  Updating the Claude Code plugin"
+claude plugin marketplace update obsydia || echo "    (non-fatal) run it yourself later"
 claude plugin update obsydia-skills@obsydia || echo "    (non-fatal) run it yourself later"
+
+if [ "$CHANNEL" = "local" ]; then
+  echo "==> 6/6  Checking that no account copy overrides the local plugin"
+  check_override || true
+  echo ""
+  echo "Done. Quit the desktop app completely and reopen it to load $VERSION."
+  echo "On the other machine: git pull, then update the plugin"
+  echo "  (Windows: powershell -ExecutionPolicy Bypass -File .\\windows\\setup-windows.ps1 -Update)."
+  echo "After the restart, confirm with: bash skills-push.sh --check"
+  exit 0
+fi
 
 fi  # end of the full-publish path skipped by --build-zip
 

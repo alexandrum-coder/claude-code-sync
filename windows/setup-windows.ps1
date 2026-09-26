@@ -149,8 +149,12 @@ if ($Backup) {
 }
 
 # ---------------------------------------------------------------- preconditions
-$last = Get-ChildItem $BROOT -Directory -ErrorAction SilentlyContinue | Sort-Object Name -Descending | Select-Object -First 1
-if (-not $last -or -not (Test-Path (Join-Path $last.FullName 'SHA256SUMS.txt'))) { Stop-Plan "no verified backup found in $BROOT. Run -Backup first." }
+# Only settings backups made by -Backup (named yyyyMMdd-HHmmss, with SHA256SUMS.txt);
+# other folders here, e.g. memory-* from merge-memory.ps1, are not settings backups.
+$last = Get-ChildItem $BROOT -Directory -ErrorAction SilentlyContinue |
+  Where-Object { $_.Name -match '^\d{8}-\d{6}$' -and (Test-Path (Join-Path $_.FullName 'SHA256SUMS.txt')) } |
+  Sort-Object Name -Descending | Select-Object -First 1
+if (-not $last) { Stop-Plan "no verified backup found in $BROOT. Run -Backup first." }
 Write-Host "Using backup: $($last.FullName)"
 
 $script:CLAUDE = Find-Claude

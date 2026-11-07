@@ -21,6 +21,13 @@ Verificările obișnuite: planul este cel mai recent pe subiect, starea de porni
 
 Trei verificări sunt blocante: `R-CLIP-1` (metoda de autoverificare scrisă), `R-CLIP-2` (cazurile de test enumerate pe roluri și stări) și `R-CLIP-4` (ciclul de autoverificare rămâne în limite sigure). Lipsa `R-CLIP-1` dă STOP. `R-CLIP-2` și `R-CLIP-4` dau STOP sau GO-CU-CONDIȚII, după cum precizează checklistul.
 
+Un task care scrie sau modifică cod ori lucrează pe date de aplicație mai primește patru verificări. Natura taskului se stabilește din plan, cu `fișier:linie`. La orice alt task, rândurile lor apar cu PASS și dovada „nu se aplică”.
+
+- Partea de cod din `R-CLIP-1`: mediu de test separat de producție, câte un cont de test pentru fiecare stare importantă (rol, plată, înregistrare terminată sau nu), folosite de agent singur, cu ciclul reluat până când funcția merge. Fără mediu separat sau fără niciun cont de test: STOP.
+- `R-CLIP-5`: planul funcției este scris și discutat cu D înainte de orice cod. Lipsa lui dă FAIL.
+- `R-CLIP-6`: accesul agentului la date și metrici (de exemplu prin MCP) este securizat, cu drepturi minime, acordul scris al clientului pentru datele lui și definiții scrise pentru măsuri. Lipsa acordului sau a verificării la un task care atinge date de client dă FAIL.
+- `R-CLIP-7`: înainte de un skill nou se caută skill-ul existent pentru tipul de muncă, iar skill-urile se țin în biblioteca comună a echipei. Dă cel mult WARN.
+
 ### `checkpoint`
 
 Se rulează după fiecare pas sau lot terminat. Citește `references/checklist-checkpoint.md` și `references/clip.md`.
@@ -56,8 +63,8 @@ Un rezultat PASS cere dovadă. Ce nu a fost observat direct rămâne NEVERIFICAT
 
 ## Referințe
 
-- `references/checklist-preflight.md`: verificările de pornire, clasificarea A/B/C și cele trei verificări blocante.
+- `references/checklist-preflight.md`: verificările de pornire, clasificarea A/B/C, cele trei verificări blocante și `R-CLIP-5…7` pentru taskurile de cod și date.
 - `references/checklist-checkpoint.md`: verificările de după pas și `R-CLIP-3`.
-- `references/clip.md`: sursa ideilor din spatele `R-CLIP-1…4`, cu marcaje de timp.
+- `references/clip.md`: sursa ideilor din spatele `R-CLIP-1…7`, cu marcaje de timp.
 - `references/INDEX.md`: indexul regulilor R-01…R-223, cu fișierele tematice alături.
 - `references/corectii-D.md`: corpusul de corecții `K-NNN`.

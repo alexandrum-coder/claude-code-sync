@@ -91,7 +91,7 @@ python3 scripts/verifica_fisa.py "surse/<slug>/fisa-episod.md" "surse/<slug>/tra
 
 Al treilea argument e numărul de blocuri din transcriere, nu durata rotunjită în sus. Un episod de 20:01 are 20 de blocuri, iar 21 ar cere idei într-un interval fără transcriere.
 
-Ținta e „Ran 26 tests … OK” și `0 erori`. Corectează fișa, nu validatorul. Adaugă comenzile și rezultatul în `rulari-teste.log`, cu data și ora.
+Ținta e „Ran 27 tests … OK” și `0 erori`. Corectează fișa, nu validatorul. Excepția e un defect dovedit al validatorului, cum a fost cel cu minutele de după 60, marcate `[1:MM:00]` în transcriere: îl repari doar cu un test nou văzut eșuând, verifici că fișele vechi dau tot `0 erori` și notezi abaterea în `progres-etapa-1.md`. Adaugă comenzile și rezultatul în `rulari-teste.log`, cu data și ora.
 
 ### 7. Verifică sensul
 

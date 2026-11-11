@@ -8,6 +8,14 @@
             "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/task_verifier_trigger.py\""
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/prompt_agent_trigger.py\""
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -17,6 +25,15 @@
           {
             "type": "command",
             "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/task_verifier_trigger.py\""
+          }
+        ]
+      },
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/hooks/prompt_agent_trigger.py\""
           }
         ]
       }

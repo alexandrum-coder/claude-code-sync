@@ -43,8 +43,8 @@ Dacă AskUserQuestion lipsește sau pică, scrie întrebările numerotate, apoi 
 - Aprobarea e un „da” explicit: „aprob”, „da”, „ok”, „go” sau „Aprob” bifat. Un comentariu care doar sună pozitiv nu e aprobare.
 - La renunțare („renunț”, „lasă”), oprește-te fără să pornești lucrul.
 
-## 5. Predarea după aprobare (opțională)
-Caută un agent disponibil al cărui nume e exact `personal-assistant` sau se termină în `:personal-assistant`. Dacă nu există, sari pasul fără comentariu. Dacă există, cheamă-l o singură dată, cu:
+## 5. Predarea după aprobare (când agentul există)
+Caută un agent disponibil al cărui nume e exact `personal-assistant` sau se termină în `:personal-assistant`. Dacă nu există, sari pasul fără comentariu. Dacă există, chemarea lui e obligatorie: o singură dată, imediat după aprobare și înainte de orice Write, Edit sau Bash, cu:
 
 ```
 <prompt-final tinta="<tinta>" aprobat="da">

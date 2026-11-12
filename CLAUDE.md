@@ -1,6 +1,6 @@
 ## Skill routing
 
-Routing goes through the agent whose name ends in `:personal-assistant`: after prompt-agent, and whenever it is unclear which skill, agent, plugin or MCP server to use.
+Routing goes through the agent whose name ends in `:personal-assistant`: after prompt-flow, and whenever it is unclear which skill, agent, plugin or MCP server to use.
 
 ## Prompt Hygiene
 

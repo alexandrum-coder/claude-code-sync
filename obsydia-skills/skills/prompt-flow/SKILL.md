@@ -1,15 +1,15 @@
 ---
-name: prompt-agent
-description: Transformă cererea brută de lucru a utilizatorului într-un prompt final optimizat (prin subagentul prompt-agent, care folosește prompt-master și, dacă e instalat, ecc:prompt-optimizer), îl arată într-un bloc de cod gata de copiat și pornește lucrul doar după aprobarea explicită. Folosește-l când nota hook-ului prompt-agent o cere la prima cerere de lucru din sesiune sau când utilizatorul rulează /prompt-agent pentru o cerere nouă din aceeași sesiune. Nu-l folosi pentru saluturi, întrebări de conversație sau confirmări.
+name: prompt-flow
+description: Transformă cererea brută de lucru a utilizatorului într-un prompt final optimizat (prin subagentul prompt-agent, care folosește prompt-master și, dacă e instalat, ecc:prompt-optimizer), îl arată într-un bloc de cod gata de copiat și pornește lucrul doar după aprobarea explicită. Folosește-l când nota hook-ului prompt-flow o cere la prima cerere de lucru din sesiune sau când utilizatorul rulează /prompt-flow pentru o cerere nouă din aceeași sesiune. Nu-l folosi pentru saluturi, întrebări de conversație sau confirmări.
 ---
 
-# prompt-agent
+# prompt-flow
 
 Lucrul nu pornește înainte de aprobare: fără Write, Edit, Bash, NotebookEdit, fără trimiteri și fără alte efecte. Până atunci sunt permise doar Skill, Agent, AskUserQuestion și SendMessage.
 
 ## 1. Cererea
 - Chemat de hook: cererea e ultimul mesaj al utilizatorului.
-- Chemat ca `/prompt-agent <text>`: cererea e `<text>`. Fără text, cere cererea într-o propoziție și oprește-te.
+- Chemat ca `/prompt-flow <text>`: cererea e `<text>`. Fără text, cere cererea într-o propoziție și oprește-te.
 
 ## 2. Optimizarea, în subagent
 Cheamă `Agent` cu `subagent_type` = primul agent disponibil al cărui nume e exact `prompt-agent` sau se termină în `:prompt-agent`. Prompt:
